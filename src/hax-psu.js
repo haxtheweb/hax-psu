@@ -787,13 +787,9 @@ export class HaxPsu extends DDD {
       this.shadowRoot.querySelector('.create')._doGlitch();
     }, 6000);
     setTimeout(() => {
-      this.shadowRoot.querySelector('.create').innerHTML = "BROCHURES";
-      this.shadowRoot.querySelector('.create')._doGlitch();
-    }, 9000);
-    setTimeout(() => {
       this.shadowRoot.querySelector('.create').innerHTML = "ANYTHING";
       this.shadowRoot.querySelector('.create')._doGlitch();
-    }, 12000);
+    }, 9000);
   }
 
   render() {
@@ -825,7 +821,7 @@ export class HaxPsu extends DDD {
         </h1>
         <p slot="entice">Part of <strong>Penn State</strong>?</p>
         <simple-cta slot="entice" id="psubtn" link="/login.php">Login</simple-cta>
-        <simple-cta hide-icon data-primary="13" slot="buttons" link="https://hax.cloud" target="_blank">Public Demo</simple-cta>
+        <simple-cta hide-icon data-primary="10" slot="buttons" link="https://hax.cloud" target="_blank">Public Demo</simple-cta>
         <simple-cta hide-icon data-primary="18" slot="buttons" link="https://haxtheweb.org/">Docs</simple-cta>
       </page-section>
       <page-section id="section-2" class="section" scroller scroller-label="By the numbers">
@@ -905,8 +901,9 @@ hax start
             <p>
               HAX is a service provided through a collaboration between 
               <a href="https://arts.psu.edu/" target="_blank"><mark>Penn State College of Arts and Architecture</mark></a>,
+              <a href="https://ist.psu.edu/" target="_blank"><mark data-primary="1">College of Information Sciences and Technology</mark></a>, and
+              <a href="https://ed.psu.edu/" target="_blank"><mark data-primary="18">College of Education</mark></a>,
               <a href="https://science.psu.edu/" target="_blank"><strong>Eberly College of Science</strong></a>,
-              <a href="https://ist.psu.edu/" target="_blank"><strong>College of Information Sciences and Technology</strong></a>, and
               <a href="https://libraries.psu.edu/" target="_blank"><strong>University libraries</strong></a>.              ,
               The platform is powered by <em>HAXcms</em>, originally developed to power 100s of high scale online courses.
             </p>
@@ -952,7 +949,7 @@ hax start
             </summary>
             <p>
               The HAX user community is supported internal to Penn State by a collaboration between several units including the College of Arts and Architecture,
-              Eberly College of Science, College of Information Sciences and Technology, and University Libraries. HAX also receives contributions from groups outside of Penn State including Buttercups LLC and community members at large.
+              College of Information Sciences and Technology, College of Education, Eberly College of Science, and University Libraries. HAX also receives contributions from groups outside of Penn State including Buttercups LLC and community members at large.
             </p>
           </details>
           <details>
@@ -992,12 +989,14 @@ hax start
           </details>
           <details>
             <summary>
-              What's with the 8-bit RPG administration design?
+              What's with the 8-bit RPG characters?
             </summary>
             <div>
             <p>Our 8-bit vibe was a design challenge presented to four College of IST students in the Spring of 2022. They were tasked with
               creating an over-world design that was fun, inviting, creative, and unique. The team took these requirements and built an
-              experience that is playful, easy to use, and feels more like playing a video game than building a website.
+              experience that is playful, easy to use, and feels more like playing a video game than building a website. This inspired the
+              creation of future iterations of the system which get more professional with each release, yet still retain the playful aspects
+              at times to remind us of who we are building for.
             </p>
             <div class="rpg-container">
               <rpg-character></rpg-character>
@@ -1005,8 +1004,8 @@ hax start
               <rpg-character></rpg-character>
               <rpg-character></rpg-character>
             </div>
-            <p>Each RPG style character is unique to the user logging in and helps provide a humanizing and playful element to other aspects
-              of what otherwise would be a mundane administrative interface. Websites produced by HAX can be a mix of professional and playful
+            <p>Much like 8-bit video games were designed to be approachable and fun for all ages,
+              HAX is designed to be approachable and fun for all skill levels!Each RPG style character is unique to the user logging in and helps provide a humanizing touch. Websites produced by HAX can be a mix of professional and playful
               but the 8-bit design helps you designate between the admin task and what end-users see.
             </p>
             </div>
