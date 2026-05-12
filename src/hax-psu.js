@@ -821,8 +821,8 @@ export class HaxPsu extends DDD {
         </h1>
         <p slot="entice">Part of <strong>Penn State</strong>?</p>
         <simple-cta slot="entice" id="psubtn" link="/login.php">Login</simple-cta>
-        <simple-cta hide-icon data-primary="10" slot="buttons" link="https://hax.cloud" target="_blank">Public Demo</simple-cta>
-        <simple-cta hide-icon data-primary="18" slot="buttons" link="https://haxtheweb.org/">Docs</simple-cta>
+        <simple-cta hide-icon data-primary="21" slot="buttons" link="https://github.com/haxtheweb" target="_blank">Open Source</simple-cta>
+        <simple-cta hide-icon data-primary="11" slot="buttons" link="https://haxtheweb.org/">Docs</simple-cta>
       </page-section>
       <page-section id="section-2" class="section" scroller scroller-label="By the numbers">
         <div class="section-style-1">
