@@ -805,6 +805,7 @@ export class HaxPsu extends DDD {
         <a href="#section-2" tabindex="-1" class="menu-item"><button data-target="section-2">HAX</button></a>
         <a href="#section-3" tabindex="-1" class="menu-item"><button data-target="section-3">Usage</button></a>
         <a href="#section-4" tabindex="-1" class="menu-item"><button data-target="section-4">Users</button></a>
+        <a href="#section-4b" tabindex="-1" class="menu-item"><button data-target="section-4b">Impact</button></a>
         <a href="#section-5" tabindex="-1" class="menu-item"><button data-target="section-5">Examples</button></a>
         <a href="#section-6" tabindex="-1" class="menu-item"><button data-target="section-6">Create</button></a>
         <a href="#section-7" tabindex="-1" class="menu-item"><button data-target="section-7">About</button></a>
@@ -827,15 +828,14 @@ export class HaxPsu extends DDD {
       <page-section id="section-2" class="section" scroller scroller-label="By the numbers">
         <div class="section-style-1">
           <h2 data-design-treatment="horz-full" data-primary="7">What is HAX?</h2>
-          <p><strong>A radically simple approach to <em>web authoring</em> and <em>content ownership</em>.</strong></p>
-          <p>We believe <mark data-primary="1">everyone</mark> should be <mark data-primary="12">creative</mark> online <em>without understanding platforms or requiring specific vendors</em> just to have a voice online.
-            HAX unlocks web creativity via a block ecosystem that creates <mark data-primary="13">sustainable</mark> content that is <mark>fast</mark> and easy to <mark data-primary="18">maintain</mark>. HAX tools are easy enough for tech-novices to use while outputting clean, <mark data-primary="15">semantic</mark>, rich HTML like a web-veteran!
-          </p>
+          <p><strong>A standards-based publishing platform for <em>web authoring</em> and <em>content ownership</em>.</strong></p>
+          <p>HAX is Penn State's open-source web authoring platform for accessible, standards-based publishing. It helps teams publish faster without sacrificing quality through portable content and long-term ownership not tied to a single vendor.</p>
+          <p>HAX supports teaching, research, outreach, and student development with a shared platform that scales from one course site to institution-wide initiatives.</p>
           <h3 data-design-treatment="horz-50p" data-primary="16">Part of Penn State?</h3>
           <p>
-            <simple-cta data-primary="8" data-accent="3" hotline filled outlined slot="buttons" link="/login.php">Get Started now!</simple-cta>
+            <simple-cta data-primary="8" data-accent="3" hotline filled outlined slot="buttons" link="/login.php">Log in to get started</simple-cta>
           </p>
-          <h4 data-design-treatment="horz-25p" data-primary="18">Know terminal?</h4>
+          <h4 data-design-treatment="horz-25p" data-primary="18">Prefer command line?</h4>
           <pre><code><strong>npm install --global @haxtheweb/create
 hax start
 </strong></code></pre>
@@ -864,26 +864,36 @@ hax start
         ` : nothing}
       </page-section>
       <page-section id="section-4" accent-color="blue" bg="var(--primary-color-2)" image="" scroller scroller-label="Examples built with HAX" filter fold class="section">
-        <h2>Who is HAX for?</h2>
+        <h2>Built for every role at Penn State</h2>
         <grid-plate layout="1-1-1" style="margin-top:40px;">
           <p slot="col-1">
-            <strong>Faculty</strong> - Build a course, a research website, or a personal site without
-            having to learn the technologies that power them. HAX reduces months to minutes and is a sustainable
-            way of building content so you can shine.
+            <strong>Faculty</strong> - Create and update accessible course materials quickly. Reuse content across semesters, keep ownership of your work, and focus on teaching instead of platform complexity.
           </p>
           <p slot="col-1"><strong>Focus on teaching</strong>, <em>not complexity!</em></p>
           <p slot="col-2">
-            <strong>Students</strong> - Build a portfolio, a resume, or a personal website, then take it with you when
-            your time here has ended. HAX is portable, lightweight, requires no database, and is a great solution for 
-            students to stand up quick sites that they can set and forget about. It's also been developed by IST and
-            Arts and Architecture students making it that much more your platform!
+            <strong>Students</strong> - Build portfolios, resumes, and project sites you can take with you beyond graduation. HAX is portable and lightweight, and it gives students meaningful ways to learn by doing while contributing to a vibrant campus publishing community.
           </p>
           <p slot="col-3">
-            <strong>Staff</strong> - Build a department website, a project website, or a personal website a throw away,
-            anything you need. Set up a quick site to talk about a project, download the site and throw it on another server.
+            <strong>Staff</strong> - Build a department website, a project website, or a personal website for a short-term initiative,
+            anything you need. Set up a quick site to talk about a project, download the site and host it on another server.
             Host content from github or anywhere else. HAX is there to help you get your job done faster with less training.
           </p>
         </grid-plate>
+      </page-section>
+      <page-section id="section-4b" class="section" preset="lines">
+        <div class="section-style-1">
+          <h2>Institutional impact</h2>
+          <p>HAX combines academic flexibility with operational discipline. It is supported through cross-college collaboration and designed for long-term maintainability.</p>
+          <ul>
+            <li>Open-source and portable architecture that reduces vendor lock-in risk</li>
+            <li>Accessibility-forward publishing practices</li>
+            <li>Shared governance across participating units</li>
+            <li>Demonstrated adoption across courses, programs, and public-facing sites</li>
+          </ul>
+          <p>
+            <simple-cta data-primary="8" data-accent="3" hotline filled outlined slot="buttons" link="mailto:bmr1@psu.edu">Discuss adoption for your unit</simple-cta>
+          </p>
+        </div>
       </page-section>
       <page-section id="section-5" class="section" scroller scroller-label="Watch how to make a site">
         <h2>Examples</h2>
