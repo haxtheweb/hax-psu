@@ -938,7 +938,7 @@ hax start
         <ul>
           <li><a href="https://haxtheweb.org/tutorials/migrate-data-to-hax">Migrating content to HAX</a></li>
           <li><a href="https://haxtheweb.org/tutorials/block-usage">Block tutorials</a></li>
-          <li><a href="https://haxtheweb.org/the-gallery-of-online-excellence">The Gallery of Online Excelence</a></li>
+          <li><a href="https://haxtheweb.org/the-gallery-of-online-excellence">The Gallery of Online Excellence</a></li>
         </ul>
       </page-section>
         <page-section id="section-9" class="section">
@@ -967,7 +967,7 @@ hax start
               How do I join the community?
             </summary>
             <p>
-              Join our community Discord channel to get support from the community and the HAX team. <a href="https://bit.ly/hax-discord">Join the HAX Discord</a>
+              Join our community Discord channel to get support from the community and the HAX team. <a href="https://discord.gg/EKYJAjqGhf">Join the HAX Discord</a>
             </p>
           </details>
           <details>
