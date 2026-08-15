@@ -7,7 +7,8 @@
   "type": "module",
   "scripts": {
     "screenshots": "node scripts/screenshot.mjs",
-    "build": "npm run screenshots && rimraf dist && rollup -c rollup.config.js && npm run analyze -- --exclude dist built && rm -rf built && cp -r dist built && cp -r env/* built/ && cp env/.htaccess built/",
+    "build:agent-skills": "node scripts/build-agent-skills-index.cjs",
+    "build": "npm run screenshots && rimraf dist && rollup -c rollup.config.js && npm run analyze -- --exclude dist built && npm run build:agent-skills && rm -rf built && cp -r dist built && cp -r env/* built/ && cp env/.htaccess built/ && cp llms.txt built/ && cp -r .well-known built/",
     "start:build": "web-dev-server --root-dir dist --app-index index.html --open",
     "analyze": "cem analyze --litelement",
     "start": "web-dev-server"

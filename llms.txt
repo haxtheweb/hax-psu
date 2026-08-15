@@ -1,0 +1,67 @@
+# HAX at Penn State
+
+> Free, open source, forever — unleashing creativity in a sustainable way. HAX at Penn State gives students, faculty, and staff the ability to manage websites regardless of their technical experience. This is the hax.psu.edu homepage SPA (a rollup-built single-page app with a PHP backend), hosted and supported by a collaboration of multiple Penn State colleges and outside contributors.
+
+## What this site is
+
+This repository (`hax-psu`) is the public front door for HAX at Penn State at https://hax.psu.edu/. It is NOT a HAXcms content site (there is no `site.json` or `pages/` directory here). It is a single-page application built with LitElement + the DDD design system, backed by a small PHP backend (`env/`) for login and a daily cron. The HAXcms authoring platform, documentation, and course sites live elsewhere in the ecosystem.
+
+## Key resources
+
+- [Log in / Start](https://hax.psu.edu/login.php): Penn State WebAccess single sign-on entry to the HAXcms authoring service.
+- [Try HAX (demo)](https://hax.cloud): No-login demo of the HAX editor on HAX.cloud.
+- [Learn HAX](https://haxtheweb.org): Official HAX documentation site (a HAXcms site) — philosophy, pillars, tutorials, component reference.
+- [HAX Documentation](https://haxtheweb.org/ddd): DDD design system reference.
+- [HAX CLI](https://www.npmjs.com/package/@haxtheweb/create): `npm install @haxtheweb/create --global` then `hax help`.
+- [Unified issue queue](https://github.com/haxtheweb/issues): All HAX ecosystem bugs, features, and discussion.
+- [Community Discord](https://discord.gg/EKYJAjqGhf): Chat with the HAX community.
+
+## Agent discovery (machine-readable)
+
+- [Agent skills index](https://hax.psu.edu/.well-known/agent-skills/index.json): agentskills.io discovery v0.2.0 index of the curated HAX skills published from this domain. Each entry has `name`, `description`, `url` (relative to the index), and `sha256` digest.
+- [Security policy](https://hax.psu.edu/.well-known/security.txt): RFC 9116 security contact information.
+- [Sitemap](https://hax.psu.edu/sitemap.xml): Published when generated.
+
+## Curated HAX skills (install separately)
+
+The skills below are discoverable at `/.well-known/agent-skills/` on this domain and are maintained in the `haxtheweb/praw` repository. Install all of them, or pick individually:
+
+```bash
+npx skills add haxtheweb/praw --all
+
+# Or install individually
+npx skills add haxtheweb/praw --skill hax-site-building
+npx skills add haxtheweb/praw --skill hax-claudehax
+```
+
+The curated set (the "normal HAX site" skill set):
+
+- **hax-site-building**: HAXcms site creation and theme management
+- **hax-site-structure**: Read/navigate an existing HAXcms site from its portable files
+- **hax-design-system**: DDD design system application and SimpleColors migration
+- **hax-a11y-audit**: WCAG 2.0 AA diagnostic of authored HAX content
+- **hax-udl-audit**: Universal Design for Learning 3.0 diagnostic
+- **hax-content-authoring**: Author HAX page content with the right components/conventions
+- **hax-content-chunking-audit**: Cognitive-load / content-chunking diagnostic
+- **hax-managed-files**: Know which HAXcms files are generated vs authored (build footguns)
+- **hax-claudehax**: Operate HAX sites via the ClaudeHAX plugin / HAX CLI
+- **hax-webcomponent-dev**: Web component dev with LitElement, DDD, HAXSchema
+- **hax-ecosystem-onboarding**: New developer onboarding and environment setup
+- **hax-ubd-backward-design**: UbD backward design for HAX course units
+- **hax-ubd-stage1** / **hax-ubd-stage2** / **hax-ubd-stage3**: UbD Stage 1/2/3 workflows
+- **hax-ubd-essential-questions** / **hax-ubd-grasps** / **hax-ubd-six-facets**: UbD companions
+- **hax-ubd-unit-audit**: UbD diagnostic for an existing HAX site/unit
+- **oerschema-audit**: OER Schema diagnostic of authored content
+- **oerschema-integration-finder**: Scan components/backends for missing OER Schema emission
+
+## Companion skills (install separately)
+
+The Anthropic document skills (`docx`, `pdf`, `pptx`, `xlsx`) are source-available, not open source, and are NOT bundled here. Install them from Anthropic's official repo:
+
+```bash
+npx skills add anthropics/skills --skill docx --skill pdf --skill pptx --skill xlsx -g -y
+```
+
+## Ecosystem context
+
+HAX (Headless Authoring eXperience) is a comprehensive web development ecosystem: a monorepo of 250+ LitElement web components, the HAXcms file-based CMS, the DDD design system, the HAX CLI (`@haxtheweb/create`), and HAX.cloud infrastructure. HAX is built on community pillars — Accessible, Extensible, Free and Open, Efficient, Platform Agnostic, Remixable, Sustainable — with deep roots in educational technology and OER (the 5Rs: Retain, Reuse, Revise, Remix, Redistribute).
