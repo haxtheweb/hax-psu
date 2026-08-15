@@ -1,6 +1,4 @@
 import { html, render, css, nothing } from 'lit';
-import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
-import '@shoelace-style/shoelace/dist/translations/en.js';
 import "@haxtheweb/page-section/page-section.js";
 import "@haxtheweb/future-terminal-text/future-terminal-text.js";
 import "@haxtheweb/simple-cta/simple-cta.js";
@@ -9,8 +7,6 @@ import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 import {
   DDDAllStyles
 } from "@haxtheweb/d-d-d/lib/DDDStyles.js";
-// Set the base path to the folder you copied Shoelace's assets to
-setBasePath('dist/shoelace');
 
 export class HaxPsu extends DDD {
   static get properties() {

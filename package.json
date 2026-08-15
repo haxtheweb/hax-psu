@@ -4,34 +4,31 @@
   "license": "Apache-2.0",
   "author": "btopro",
   "version": "9.0.6",
+  "type": "module",
   "scripts": {
     "build": "rimraf dist && rollup -c rollup.config.js && npm run analyze -- --exclude dist built && rm -rf built && cp -r dist built && cp -r env/* built/ && cp env/.htaccess built/",
     "start:build": "web-dev-server --root-dir dist --app-index index.html --open",
     "analyze": "cem analyze --litelement",
     "start": "web-dev-server"
   },
-  "resolutions": {
-    "@shoelace-style/shoelace": "2.8.0"
-  },
   "dependencies": {
-    "@haxtheweb/accent-card": "^25.0.0",
-    "@haxtheweb/count-up": "^25.0.0",
-    "@haxtheweb/d-d-d": "^25.0.0",
-    "@haxtheweb/future-terminal-text": "^25.0.0",
-    "@haxtheweb/grid-plate": "^25.0.0",
-    "@haxtheweb/hax-iconset": "^25.0.0",
-    "@haxtheweb/page-section": "^25.0.0",
-    "@haxtheweb/play-list": "^25.0.0",
-    "@haxtheweb/rpg-character": "^25.0.0",
-    "@haxtheweb/scroll-button": "^25.0.0",
-    "@haxtheweb/simple-colors": "^25.0.0",
-    "@haxtheweb/simple-cta": "^25.0.0",
-    "@haxtheweb/simple-icon": "^25.0.0",
-    "@haxtheweb/simple-img": "^25.0.0",
-    "@haxtheweb/utils": "^25.0.0",
-    "@haxtheweb/video-player": "^25.0.0",
-    "@shoelace-style/shoelace": "2.8.0",
-    "lit": "3.3.2"
+    "@haxtheweb/accent-card": "^26.8.0",
+    "@haxtheweb/count-up": "^26.8.0",
+    "@haxtheweb/d-d-d": "^26.8.0",
+    "@haxtheweb/future-terminal-text": "^26.8.0",
+    "@haxtheweb/grid-plate": "^26.8.0",
+    "@haxtheweb/hax-iconset": "^26.8.0",
+    "@haxtheweb/page-section": "^26.8.0",
+    "@haxtheweb/play-list": "^26.8.0",
+    "@haxtheweb/rpg-character": "^26.8.0",
+    "@haxtheweb/scroll-button": "^26.8.0",
+    "@haxtheweb/simple-colors": "^26.8.0",
+    "@haxtheweb/simple-cta": "^26.8.0",
+    "@haxtheweb/simple-icon": "^26.8.0",
+    "@haxtheweb/simple-img": "^26.8.0",
+    "@haxtheweb/utils": "^26.8.0",
+    "@haxtheweb/video-player": "^26.8.0",
+    "lit": "3.3.3"
   },
   "devDependencies": {
     "@babel/preset-env": "7.29.5",
@@ -48,7 +45,11 @@
     "rimraf": "3.0.2",
     "rollup": "^3.30.0",
     "rollup-plugin-copy": "3.4.0",
-    "rollup-plugin-workbox": "8.1.3"
+    "rollup-plugin-workbox": "9.0.0"
   },
-  "customElements": "custom-elements.json"
+  "customElements": "custom-elements.json",
+  "overrides": {
+    "serialize-javascript": "7.1.0",
+    "rollup-plugin-workbox": "9.0.0"
+  }
 }

@@ -66,11 +66,6 @@ export default {
           dest: `${outputDir}/svgs`,
           flatten: false
         },
-        {
-          src: path.resolve(__dirname, 'node_modules/@shoelace-style/shoelace/dist/assets'),
-          dest: path.resolve(__dirname, 'dist/shoelace'),
-          flatten: false
-        },
       ],
     }),
     /** Resolve bare module imports */
