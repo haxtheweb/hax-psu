@@ -96,4 +96,21 @@ DirectoryIndex index.php index.html
 <IfModule mod_headers.c>
   # Disable content sniffing, since it's an attack vector.
   Header always set X-Content-Type-Options nosniff
+  # Long, immutable cache for content-hashed rollup assets (entry/chunks
+  # are emitted as [hash].js / [hash].css — safe to cache for a year).
+  <FilesMatch "^([a-f0-9]{6,})\.(js|css)$">
+    Header always set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # Long cache for static media/font assets (not hash-named but stable).
+  <FilesMatch "\.(jpe?g|png|gif|webp|avif|svg|ico|woff2?|ttf|eot)$">
+    Header always set Cache-Control "public, max-age=31536000"
+  </FilesMatch>
+  # Service worker and HTML must always revalidate so updates ship quickly.
+  <FilesMatch "^(sw\.js|index\.html?)$">
+    Header always set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  # PHP endpoints are dynamic — never cache.
+  <FilesMatch "\.php$">
+    Header always set Cache-Control "no-store"
+  </FilesMatch>
 </IfModule>
