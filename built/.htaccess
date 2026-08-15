@@ -43,16 +43,11 @@ DirectoryIndex index.php index.html
   AddType application/javascript .js.br
   AddType application/octet-stream .symbols.json.br
 </IfModule>
-# Requires mod_expires to be enabled.
-<IfModule mod_expires.c>
-  # Enable expirations.
-  ExpiresActive On
-  # Cache all files for 2 weeks after access (A).
-  ExpiresDefault A1209600
-  <FilesMatch \.php$>
-    ExpiresActive Off
-  </FilesMatch>
-</IfModule>
+# Cache policy is set explicitly via Cache-Control headers below (mod_headers).
+# The previous ExpiresDefault A1209600 catch-all was removed because it
+# cascaded into the /cdn/ subtree and competed with the CDN's own policy.
+# Cache-Control supersedes Expires per HTTP/1.1, so the explicit rules
+# below are authoritative for the homepage and leave /cdn/ untouched.
 # Various rewrite rules.
 <IfModule mod_rewrite.c>
   RewriteEngine on
@@ -92,24 +87,32 @@ DirectoryIndex index.php index.html
     </FilesMatch>
   </IfModule>
 </IfModule>
+# Mark requests targeting the shared CDN subtree (/cdn/1.x.x) so the
+# homepage cache policy below skips them — the CDN has its own policy.
+# (A docroot .htaccess cascades into subdirs, so without this guard the
+# FilesMatch rules would also hit /cdn/ assets.)
+<IfModule mod_setenvif.c>
+  SetEnvIf Request_URI ^/cdn/ cdn_asset
+</IfModule>
 # Add headers to all responses.
 <IfModule mod_headers.c>
   # Disable content sniffing, since it's an attack vector.
   Header always set X-Content-Type-Options nosniff
   # Long, immutable cache for content-hashed rollup assets (entry/chunks
   # are emitted as [hash].js / [hash].css — safe to cache for a year).
+  # env=!cdn_asset keeps these OFF the /cdn/ subtree.
   <FilesMatch "^([a-f0-9]{6,})\.(js|css)$">
-    Header always set Cache-Control "public, max-age=31536000, immutable"
+    Header always set Cache-Control "public, max-age=31536000, immutable" env=!cdn_asset
   </FilesMatch>
-  # Long cache for static media/font assets (not hash-named but stable).
+  # Long cache for static media/font assets shipped with the homepage.
   <FilesMatch "\.(jpe?g|png|gif|webp|avif|svg|ico|woff2?|ttf|eot)$">
-    Header always set Cache-Control "public, max-age=31536000"
+    Header always set Cache-Control "public, max-age=31536000" env=!cdn_asset
   </FilesMatch>
   # Service worker and HTML must always revalidate so updates ship quickly.
   <FilesMatch "^(sw\.js|index\.html?)$">
-    Header always set Cache-Control "no-cache, must-revalidate"
+    Header always set Cache-Control "no-cache, must-revalidate" env=!cdn_asset
   </FilesMatch>
-  # PHP endpoints are dynamic — never cache.
+  # PHP endpoints are dynamic — never cache (the CDN serves no PHP).
   <FilesMatch "\.php$">
     Header always set Cache-Control "no-store"
   </FilesMatch>
