@@ -7,6 +7,8 @@ import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 import {
   DDDAllStyles
 } from "@haxtheweb/d-d-d/lib/DDDStyles.js";
+import { examples } from "./examples.mjs";
+import { screenshotRelPath } from "./slug.mjs";
 
 export class HaxPsu extends DDD {
   static get properties() {
@@ -658,7 +660,7 @@ export class HaxPsu extends DDD {
             <div part="site-wrapper">
               <div part="site-details">
                 <a href="${item.url}" target="_blank" title="${item.title}: ${item.type}">
-                  <simple-img height="250" width="400" quality="40" src="https://screenshoturl.open-apis.hax.cloud/api/screenshotUrl?width=1500&height=900&render=img&urlToCapture=${item.image}"></simple-img>
+                  <simple-img height="250" width="400" quality="40" src="${makeUrl(screenshotRelPath(item))}" alt="Screenshot of ${item.title}"></simple-img>
                 </a>
                 <simple-cta slot="buttons" part="simple-cta" target="_blank" link="${item.url}" hotline filled outlined>${item.title}</simple-cta>
                 <div part="site-type"><strong>${item.type}</strong></div>
@@ -690,57 +692,7 @@ export class HaxPsu extends DDD {
       false,
     );
     this.title = 'HAX @ PSU';
-    this.examples = [
-      {
-        title: 'Customer Discovery 101',
-        type: "Invent Penn State",
-        description: 'Launchbox',
-        url: 'https://customerdiscovery101.launchbox.psu.edu/',
-        image: 'https://customerdiscovery101.launchbox.psu.edu/',
-      },
-      {
-        title: 'Eberly OER Courses',
-        type: "Eberly College of Science",
-        description: 'Office of Digital Learning',
-        url: 'https://oer.courses.science.psu.edu/',
-        image: 'https://oer.courses.science.psu.edu/',
-      },
-      {
-        title: 'AA 100',
-        type: "College of Arts and Architecture",
-        description: 'Introduction to International Arts course',
-        url: 'https://courses.hax.psu.edu/bto108/sites/aa100-su23/',
-        image: 'https://oer.hax.psu.edu/bto108/sites/aa100-su23/'
-      },
-      {
-        title: 'The Sea Voyage',
-        type: "University Libraries",
-        description: 'Digital Beaumont & Fletcher',
-        url: 'https://tsv-dbfp.libraries.psu.edu',
-        image: 'https://tsv-dbfp.libraries.psu.edu/content/basetext/basetext-act-02/'
-      },
-      {
-        title: 'PHYS 211',
-        type: "Eberly College of Science",
-        description: 'Mechanics course',
-        url: 'https://oer.hax.psu.edu/lul29/sites/phys211/',
-        image: 'https://oer.hax.psu.edu/lul29/sites/phys211/week-3a-kinematics-of-projectile-motion-and-uniform-circular-motion/uniform-circular-motion'
-      },
-      {
-        title: 'HAX Docs',
-        type: "HAXcellence",
-        description: 'Teaching with HAX',
-        url: 'https://haxtheweb.org/',
-        image: 'https://haxtheweb.org/ontology'
-      },
-      {
-        title: 'IST 256',
-        type: "Information Sciences & Technology",
-        description: 'Programming for the web Course',
-        url: 'https://oer.hax.psu.edu/bto108/sites/ist256/',
-        image: 'https://oer.hax.psu.edu/bto108/sites/ist256/'
-      },
-    ];
+    this.examples = examples;
     this.stats = {};
     this.year = new Date().getFullYear();
     this.image = '';
@@ -897,8 +849,8 @@ hax start
         <play-list id="examplestemplate" loop pagination></play-list>
       </page-section>
       <page-section id="section-6" class="section" preset="video">
-        <h2>Got 80 seconds?</h2>
-        <video-player source="https://www.youtube.com/watch?v=aDmSFBJmWIg" media-title="Creating your first HAX site in 80 seconds"></video-player>
+        <h2>Got 20 seconds?</h2>
+        <video-player source="https://www.youtube.com/watch?v=fZK3UiOcvag" media-title="Creating your first HAX site in 20 seconds"></video-player>
       </page-section>
       <page-section id="section-7" class="section" preset="lines">
         <grid-plate layout="1-1">

@@ -24,3 +24,6 @@ node_modules
 storybook-static
 custom-elements.json
 .vercel
+
+## local screenshot pipeline cache (the captured images in assets/screenshots/ are committed)
+/.screenshot-cache/
