@@ -142,7 +142,9 @@
       text-decoration: none;
     }
     hax-psu:not(:defined) .load-wrapper .btn {
-      display: block;
+      display: inline-block;
+      text-align: center;
+      box-sizing: content-box;
       border-width: 2px;
       border-color: var(--link-color-1);
       border-radius: 0px;
@@ -155,7 +157,7 @@
       font-style: italic;
       font-weight: 700;
       transition: color 300ms ease 0ms, background-color 300ms ease 0ms, border 300ms ease;
-      margin: 0 18%;
+      margin: 0 8px 8px 0;
       padding: 8px;
       font-size: 20px;
       width: 150px;
@@ -169,11 +171,18 @@
       background-color: var(--secondary-color-1);
 
     }
-    hax-psu:not(:defined) .load-wrapper .btn:focus,
+    hax-psu:not(:defined) .load-wrapper .btn:focus-visible,
     hax-psu:not(:defined) .load-wrapper .btn:hover {
       background-color: var(--primary-color-1);
       border-color: white;
       color: white;
+    }
+    hax-psu:not(:defined) .load-wrapper .btn:focus-visible {
+      outline: 3px solid white;
+      outline-offset: 2px;
+    }
+    hax-psu:not(:defined) h1 .line {
+      display: block;
     }
     hax-psu:not(:defined) .load-wrapper .btn-wrapper {
       margin: 0 auto;
@@ -186,21 +195,15 @@
   <hax-psu>
     <div class="load-wrapper">
       <h1><span class="text">Create <span class="create">WEBSITES</span></span>
-        <div>
+        <span class="line">
           <span class="text">with </span><span class="hax">HAX</span>
-        </div>
+        </span>
       </h1>
       <p class="entice-wrapper"><span class="psu-entice">Part of <strong>Penn State</strong>?</span></p>
       <div class="btn-wrapper">
-        <a tabindex="-1" href="/login.php">
-          <button class="btn">Start &gt;</button>
-        </a>
-        <a tabindex="-1" href="https://hax.cloud">
-          <button class="btn btn2">Try HAX (demo)</button>
-        </a>
-        <a tabindex="-1" href="https://haxtheweb.org">
-          <button class="btn btn2">Learn HAX</button>
-        </a>
+        <a class="btn" href="/login.php">Start <span aria-hidden="true">&gt;</span></a>
+        <a class="btn btn2" href="https://hax.cloud">Try HAX (demo)</a>
+        <a class="btn btn2" href="https://haxtheweb.org">Learn HAX</a>
       </div>
     </div>
   </hax-psu>
