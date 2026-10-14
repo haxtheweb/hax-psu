@@ -47,11 +47,6 @@ export default {
           flatten: false
         },
         {
-          src: 'assets/',
-          dest: `${outputDir}/assets`,
-          flatten: false
-        },
-        {
           src: 'node_modules/@haxtheweb/rpg-character/lib/',
           dest: `${outputDir}`,
           flatten: false
