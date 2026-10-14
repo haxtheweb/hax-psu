@@ -25,6 +25,10 @@ DirectoryIndex index.php index.html
 </IfModule>
 # fix for wasm
 <IfModule mod_mime.c>
+  # llms.txt / llms-full.txt are UTF-8 Markdown; without a charset some
+  # clients mangle punctuation, and .md should not download as a binary.
+  AddCharset utf-8 .txt .md
+  AddType text/markdown .md
   RemoveType .gz
   AddEncoding gzip .gz
   # The correct MIME type for .data.gz would be application/octet-stream, but due to Safari bug https://bugs.webkit.org/show_bug.cgi?id=247421, it is preferable to use MIME Type application/gzip instead.
@@ -60,6 +64,12 @@ DirectoryIndex index.php index.html
   # Make sure Authorization HTTP header is available to PHP
   # even when running as CGI or FastCGI.
   RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+  # Markdown content negotiation: agents that ask for the homepage with
+  # "Accept: text/markdown" (and not text/html) get the Markdown twin of the
+  # page instead of the JS app shell. Browsers always send text/html.
+  RewriteCond %{HTTP:Accept} text/markdown [NC]
+  RewriteCond %{HTTP:Accept} !text/html [NC]
+  RewriteRule ^(index\.(html|php))?$ llms-full.txt [L,E=markdown_request:1]
   # Pass all requests not referring directly to files in the filesystem to
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
@@ -93,11 +103,17 @@ DirectoryIndex index.php index.html
 # FilesMatch rules would also hit /cdn/ assets.)
 <IfModule mod_setenvif.c>
   SetEnvIf Request_URI ^/cdn/ cdn_asset
+  SetEnvIf Request_URI ^/(index\.(html|php))?$ homepage_request
 </IfModule>
 # Add headers to all responses.
 <IfModule mod_headers.c>
   # Disable content sniffing, since it's an attack vector.
   Header always set X-Content-Type-Options nosniff
+  # The homepage varies by Accept (HTML app vs Markdown, see rewrite above);
+  # tell caches so they don't hand Markdown to a browser.
+  Header merge Vary Accept env=homepage_request
+  Header set Content-Type "text/markdown; charset=utf-8" env=REDIRECT_markdown_request
+  Header set Content-Type "text/markdown; charset=utf-8" env=markdown_request
   # Long, immutable cache for content-hashed rollup assets (entry/chunks
   # are emitted as [hash].js / [hash].css — safe to cache for a year).
   # env=!cdn_asset keeps these OFF the /cdn/ subtree.

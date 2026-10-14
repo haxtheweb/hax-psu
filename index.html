@@ -6,7 +6,7 @@
   <base href="/" />
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,user-scalable=yes" />
   <link rel="llms" href="llms.txt" title="LLM Content Map" />
-  <link rel="alternate" type="text/markdown" href="llms.txt" title="Markdown Summary" />
+  <link rel="alternate" type="text/markdown" href="llms-full.txt" title="Full page content as Markdown" />
   <link rel="https://agentskills.io/rels/skills-index" type="application/json" href=".well-known/agent-skills/index.json" title="Agent Skills Discovery Index" />
   <meta name="generator" content="HAX" />
   <title>HAX at Penn State | powered by HAXTheWeb</title>
@@ -74,11 +74,7 @@
       background-color: var(--primary-color-1);
     }
     hax-psu:not(:defined) {
-      height: 100vh;
-      width: 100vw;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
       background-color: var(--primary-color-1);
     }
     hax-psu:not(:defined) h1 {
@@ -117,7 +113,7 @@
       display: flex;
       flex-flow: column;
       justify-content: center;
-      height: 100%;
+      min-height: 100vh;
       position: relative;
       z-index: 3;
       width: 70%;
@@ -180,6 +176,21 @@
       padding-right: 28vw;
     }
 
+    /* no-JS / crawler copy of the page; sits below the 100vh hero */
+    hax-psu:not(:defined) .static-content {
+      background-color: var(--bg-color-1);
+      color: #1a1a1a;
+      padding: 32px 15%;
+      line-height: 1.6;
+    }
+    hax-psu:not(:defined) .static-content a {
+      color: var(--link-color-1);
+    }
+    hax-psu:not(:defined) .static-content h2 {
+      color: var(--primary-color-1);
+      margin-top: 48px;
+    }
+
   </style>
 </head>
 <body vocab="http://schema.org/" prefix="oer:http://oerschema.org cc:http://creativecommons.org/ns dc:http://purl.org/dc/terms/">
@@ -202,6 +213,97 @@
           <button class="btn btn2">Learn HAX</button>
         </a>
       </div>
+    </div>
+    <!--
+      Server-rendered copy of the homepage for clients that do not run
+      JavaScript: AI answer engines (ChatGPT, Claude, Perplexity fetchers),
+      many crawlers, link unfurlers and no-JS users. <hax-psu> renders its own
+      shadow DOM without a <slot>, so once the component upgrades none of this
+      light-DOM content is displayed or exposed to assistive tech.
+      Keep in sync with src/hax-psu.js and llms-full.txt.
+    -->
+    <div class="static-content">
+      <section aria-labelledby="static-what">
+        <h2 id="static-what">What is HAX?</h2>
+        <p><strong>A standards-based publishing platform for web authoring and content ownership.</strong></p>
+        <p>HAX is Penn State's free, open-source web authoring platform for accessible, standards-based publishing. It helps teams publish faster without sacrificing quality, through portable content and long-term ownership that is not tied to a single vendor.</p>
+        <p>HAX supports teaching, research, outreach and student development with a shared platform that scales from one course site to institution-wide initiatives. The platform is powered by HAXcms, originally developed to power hundreds of high-scale online courses.</p>
+      </section>
+      <section aria-labelledby="static-start">
+        <h2 id="static-start">Get started</h2>
+        <ul>
+          <li><a href="/login.php">Log in with your Penn State account</a> to create a site on HAX at Penn State.</li>
+          <li><a href="https://hax.cloud">Try the HAX editor</a> without logging in.</li>
+          <li><a href="https://haxtheweb.org/">Read the HAX documentation</a>.</li>
+          <li>Prefer the command line? Run <code>npm install --global @haxtheweb/create</code> then <code>hax start</code>.</li>
+        </ul>
+      </section>
+      <section aria-labelledby="static-roles">
+        <h2 id="static-roles">Built for every role at Penn State</h2>
+        <h3>Faculty</h3>
+        <p>Create and update accessible course materials quickly. Reuse content across semesters, keep ownership of your work, and focus on teaching instead of platform complexity.</p>
+        <h3>Students</h3>
+        <p>Build portfolios, resumes and project sites you can take with you beyond graduation. HAX is portable and lightweight, and gives students meaningful ways to learn by doing while contributing to a vibrant campus publishing community.</p>
+        <h3>Staff</h3>
+        <p>Build a department website, a project website, or a personal website for a short-term initiative. Set up a quick site about a project, download the site and host it on another server, or host content from GitHub or anywhere else.</p>
+      </section>
+      <section aria-labelledby="static-impact">
+        <h2 id="static-impact">Institutional impact</h2>
+        <p>HAX combines academic flexibility with operational discipline. It is supported through cross-college collaboration and designed for long-term maintainability.</p>
+        <ul>
+          <li>Open-source and portable architecture that reduces vendor lock-in risk</li>
+          <li>Accessibility-forward publishing practices</li>
+          <li>Shared governance across participating units</li>
+          <li>Demonstrated adoption across courses, programs and public-facing sites</li>
+        </ul>
+        <p><a href="mailto:bmr1@psu.edu">Discuss adoption for your unit</a></p>
+      </section>
+      <section aria-labelledby="static-examples">
+        <h2 id="static-examples">Examples built with HAX</h2>
+        <ul>
+          <li><a href="https://customerdiscovery101.launchbox.psu.edu/">Customer Discovery 101</a> (Invent Penn State, Launchbox)</li>
+          <li><a href="https://oer.courses.science.psu.edu/">Eberly OER Courses</a> (Eberly College of Science, Office of Digital Learning)</li>
+          <li><a href="https://courses.hax.psu.edu/bto108/sites/aa100-su23/">AA 100: Introduction to International Arts</a> (College of Arts and Architecture)</li>
+          <li><a href="https://tsv-dbfp.libraries.psu.edu">The Sea Voyage: Digital Beaumont &amp; Fletcher</a> (University Libraries)</li>
+          <li><a href="https://oer.hax.psu.edu/lul29/sites/phys211/">PHYS 211: Mechanics</a> (Eberly College of Science)</li>
+          <li><a href="https://oer.hax.psu.edu/bto108/sites/ist256/">IST 256: Programming for the Web</a> (College of Information Sciences and Technology)</li>
+          <li><a href="https://haxtheweb.org/">HAX Docs: Teaching with HAX</a></li>
+        </ul>
+        <p>Watch <a href="https://www.youtube.com/watch?v=fZK3UiOcvag">creating your first HAX site in 20 seconds</a>.</p>
+      </section>
+      <section aria-labelledby="static-about">
+        <h2 id="static-about">About</h2>
+        <p>HAX at Penn State is a service provided through a collaboration between the <a href="https://arts.psu.edu/">College of Arts and Architecture</a>, the <a href="https://ist.psu.edu/">College of Information Sciences and Technology</a>, the <a href="https://ed.psu.edu/">College of Education</a>, the <a href="https://science.psu.edu/">Eberly College of Science</a> and <a href="https://libraries.psu.edu/">University Libraries</a>. Interested in collaboration? Contact <a href="mailto:bmr1@psu.edu">Bill Rose, Product Owner</a>.</p>
+        <h3>Privacy policy</h3>
+        <p>Penn State IT does not monitor websites and does not assume responsibility for any published content; content authors are responsible for the content of their websites. Use of this service is governed by <a href="https://security.psu.edu/awareness/psu-policies/">Penn State policies and guidelines</a>, including the <a href="https://policy.psu.edu/policies/ad54">Penn State IT Web Services Policy</a>. All pages must comply with <a href="https://policies.psu.edu/policies/ad69">Accessibility Standards, Policy AD69</a>.</p>
+      </section>
+      <section aria-labelledby="static-docs">
+        <h2 id="static-docs">Learn more</h2>
+        <ul>
+          <li><a href="https://haxtheweb.org/welcome">Full documentation and user blocks</a></li>
+          <li><a href="https://haxtheweb.org/tutorials/migrate-data-to-hax">Migrating content to HAX</a></li>
+          <li><a href="https://haxtheweb.org/tutorials/block-usage">Block tutorials</a></li>
+          <li><a href="https://haxtheweb.org/the-gallery-of-online-excellence">The Gallery of Online Excellence</a></li>
+          <li><a href="https://github.com/haxtheweb">HAX source code on GitHub</a></li>
+          <li><a href="/llms.txt">llms.txt</a> and <a href="/llms-full.txt">llms-full.txt</a> (plain-text guides for AI assistants)</li>
+        </ul>
+      </section>
+      <section aria-labelledby="static-faq">
+        <h2 id="static-faq">Frequently asked questions</h2>
+        <h3>Who can use HAX?</h3>
+        <p>Anyone, anywhere. HAX is open source, so all you need is a web server and a domain name to get started. It also supports publishing directly to GitHub Pages and other static hosts. If you are part of Penn State, just <a href="/login.php">log in</a> to get started immediately.</p>
+        <h3>Who supports HAX?</h3>
+        <p>At Penn State, HAX is supported by a collaboration between the College of Arts and Architecture, the College of Information Sciences and Technology, the College of Education, the Eberly College of Science and University Libraries. HAX also receives contributions from groups outside Penn State, including Buttercups LLC and community members at large.</p>
+        <h3>How do I join the community?</h3>
+        <p>Join the <a href="https://discord.gg/EKYJAjqGhf">HAX community Discord</a> to get support from the community and the HAX team.</p>
+        <h3>Why was HAX created?</h3>
+        <p>HAX responds to a lack of products that meet the need for accessible, engaging web content in online course environments. It was born out of a university Request for Information (RFI) for a custom Drupal instructional content management system. The requirements gathered across the university went far beyond what any commercial product offered, and no vendors responded to the subsequent Request for Proposal, so the university built a new kind of solution.</p>
+        <h3>How are decisions made?</h3>
+        <p>Decisions are informed by the needs of students, faculty and staff who take courses delivered on the platform or build material with it. Direction is steered by the Core Product Development team, which meets monthly and includes representatives from any group contributing development, design or other skills. To join, contact <a href="mailto:bmr1@psu.edu">Bill Rose, Product Owner</a>.</p>
+        <h3>What's with the 8-bit RPG characters?</h3>
+        <p>The 8-bit look began as a Spring 2022 design challenge for four College of IST students, who built an experience that feels more like playing a video game than building a website. Each RPG-style character is unique to the user logging in, and the playful admin design helps separate authoring tasks from what site visitors see.</p>
+      </section>
+      <p class="static-footer">&copy; The Pennsylvania State University &middot; <a href="https://www.psu.edu/web-privacy-statement">Privacy Statement</a> &middot; <a href="https://www.psu.edu/accessibilitystatement">Accessibility</a> &middot; <a href="https://policy.psu.edu/policies/ad85">Non Discrimination</a> &middot; <a href="https://policy.psu.edu/policies/hr11">Equal Opportunity</a> &middot; <a href="https://www.psu.edu/legal-statements">Legal Statements</a></p>
     </div>
   </hax-psu>
   <script type="module" src="./src/hax-psu.js"></script>
