@@ -211,6 +211,10 @@ export class HaxPsu extends DDD {
         font-size: var(--ddd-font-size-xl);
       }
 
+      .section.top h1 .line {
+        display: block;
+      }
+
       .section.top h1 .hax {
         font-weight: bold;
         font-style: italic;
@@ -287,37 +291,78 @@ export class HaxPsu extends DDD {
         margin-top: 10px;
       }
 
+      .menu-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 100%;
+        list-style: none;
+        gap: 0;
+        margin: 0;
+        padding: 0;
+      }
+
+      .menu-list li {
+        display: flex;
+        margin: 0;
+        padding: 0;
+      }
+
       .menu .menu-item {
         display: flex;
-        text-decoration: none;
-        height: fit-content;
-        transition: all 0.3s ease-in-out;
-      }
-
-      .menu .menu-item.menu-login button {
-        color: var(--primary-color-1);
-        background-color: var(--secondary-color-1);
-      }
-
-      .menu .menu-item button {
+        align-items: center;
+        box-sizing: border-box;
         margin: 0 16px;
         cursor: pointer;
         text-decoration: none;
         padding: 8px 16px;
         background-color: transparent;
         color: var(--primary-color-3);
-        border: 0;
+        font-weight: normal;
         height: 64px;
         transition: all 0.3s ease-in-out;
         font-family: var(--ddd-font-navigation);
         font-size: var(--ddd-font-size-xxs);
       }
 
-      .menu .menu-item button:hover,
-      .menu .menu-item button:focus {
-        color: white;
+      .menu .menu-item.menu-login {
+        color: var(--primary-color-1);
+        background-color: var(--secondary-color-1);
+      }
+
+      /* dark navy on invent orange is ~6:1; the previous white text was < 3:1 */
+      .menu .menu-item:hover,
+      .menu .menu-item:focus-visible {
+        color: var(--primary-color-1);
         background-color: var(--ddd-theme-default-inventOrange);
         text-decoration: none;
+      }
+
+      .menu .menu-item:focus-visible {
+        outline: 3px solid var(--primary-color-3);
+        outline-offset: 2px;
+      }
+
+      .skip-link,
+      .skip-link:any-link {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        z-index: 1000;
+        padding: 8px 16px;
+        background-color: var(--primary-color-3);
+        color: var(--primary-color-1);
+        font-weight: bold;
+        transform: translateY(-200%);
+      }
+
+      .skip-link:focus {
+        transform: none;
+      }
+
+      main:focus,
+      page-section:focus {
+        outline: none;
       }
 
       simple-cta {
@@ -400,6 +445,10 @@ export class HaxPsu extends DDD {
       footer a:hover:-webkit-any-link {
         text-decoration: underline;
       }
+      footer a:focus-visible {
+        outline: 2px solid var(--primary-color-3);
+        outline-offset: 2px;
+      }
       footer ul {
         display: block;
         list-style: none;
@@ -462,9 +511,14 @@ export class HaxPsu extends DDD {
       }
 
       details[open] summary ~ * {
-        animation: sweep .5s ease-in-out;
         padding: 16px;
         background-color: var(--bg-color-2);
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        details[open] summary ~ * {
+          animation: sweep .5s ease-in-out;
+        }
       }
 
       .rpg-container {
@@ -483,7 +537,7 @@ export class HaxPsu extends DDD {
           margin-right: 0px;
           margin-top: 4px;
         }
-        .menu .menu-item button {
+        .menu .menu-item {
           margin: 0px 4px;
         }
       }
@@ -492,7 +546,7 @@ export class HaxPsu extends DDD {
         .logo {
           width: 150px;
         }
-        .menu .menu-item button {
+        .menu .menu-item {
           font-size: 16px;
         }  
       }
@@ -501,7 +555,7 @@ export class HaxPsu extends DDD {
         .logo {
           width: 100px;
         }
-        .menu .menu-item button {
+        .menu .menu-item {
           padding: 4px 8px;
         }  
       }
@@ -512,7 +566,7 @@ export class HaxPsu extends DDD {
           padding: 4px;
         }
 
-        .menu .menu-item button {
+        .menu .menu-item {
           margin: 0px 4px;
           padding: 4px 8px;
           font-size: 12px;
@@ -703,8 +757,8 @@ export class HaxPsu extends DDD {
           html`
             <div part="site-wrapper">
               <div part="site-details">
-                <a href="${item.url}" target="_blank" title="${item.title}: ${item.type}">
-                  <simple-img height="250" width="400" quality="40" src="${makeUrl(screenshotRelPath(item))}" alt="Screenshot of ${item.title}"></simple-img>
+                <a href="${item.url}" target="_blank" tabindex="-1" aria-hidden="true">
+                  <simple-img height="250" width="400" quality="40" src="${makeUrl(screenshotRelPath(item))}" alt=""></simple-img>
                 </a>
                 <simple-cta slot="buttons" part="simple-cta" target="_blank" link="${item.url}" hotline filled outlined>${item.title}</simple-cta>
                 <div part="site-type"><strong>${item.type}</strong></div>
@@ -721,15 +775,13 @@ export class HaxPsu extends DDD {
 
   constructor() {
     super();
-    window.addEventListener(
+    globalThis.addEventListener(
       "hashchange",
       () => {
         setTimeout(() => {
-          if (this.shadowRoot && window.location.hash) {
-            const nextTarget = this.shadowRoot.querySelector(`${window.location.hash}`);
-            if (nextTarget && nextTarget.scrollIntoView) {
-              nextTarget.scrollIntoView({ behavior: "smooth", block: "start" });
-            }
+          if (this.shadowRoot && globalThis.location.hash) {
+            const nextTarget = this.shadowRoot.querySelector(`${globalThis.location.hash}`);
+            this.focusSection(nextTarget);
           }
         }, 0);
       },
@@ -755,6 +807,11 @@ export class HaxPsu extends DDD {
     }).catch((e) => {
       this.stats = null;
     });
+    // the glitch/word-swap effect is decorative motion; skip it entirely for
+    // people who ask the OS for reduced motion (WCAG 2.2.2 / 2.3.3)
+    if (prefersReducedMotion()) {
+      return;
+    }
     setTimeout(() => {
       this.shadowRoot.querySelector('.hax')._doGlitch();
     }, 300);
@@ -784,33 +841,56 @@ export class HaxPsu extends DDD {
     }, 9000);
   }
 
+  // scroll a section into view and move keyboard focus to it so screen
+  // reader / keyboard users land where sighted users see the page jump
+  focusSection(target) {
+    if (target && target.scrollIntoView) {
+      target.scrollIntoView({
+        behavior: prefersReducedMotion() ? "auto" : "smooth",
+        block: "start",
+      });
+      if (!target.hasAttribute("tabindex")) {
+        target.setAttribute("tabindex", "-1");
+      }
+      target.focus({ preventScroll: true });
+    }
+  }
+
+  skipToMain(e) {
+    e.preventDefault();
+    this.focusSection(this.shadowRoot.querySelector("main"));
+  }
+
   render() {
     return html`
     <header>
+      <a class="skip-link" href="#main" @click="${this.skipToMain}">Skip to main content</a>
       <div class="logo-wrapper">
         <a href="https://www.psu.edu" title="Penn State" role="link">
           <img decoding="async" width="400" height="126" src="${makeUrl('images/Penn-State-Mark.png')}" alt="Nittany Lion Shield Penn State Mark" class="logo" />
         </a>
       </div>
-      <div class="menu">
-        <a href="/login.php" tabindex="-1" class="menu-item menu-login"><button>Login</button></a>
-        <a href="#section-2" tabindex="-1" class="menu-item"><button data-target="section-2">HAX</button></a>
-        <a href="#section-3" tabindex="-1" class="menu-item"><button data-target="section-3">Usage</button></a>
-        <a href="#section-4" tabindex="-1" class="menu-item"><button data-target="section-4">Users</button></a>
-        <a href="#section-4b" tabindex="-1" class="menu-item"><button data-target="section-4b">Impact</button></a>
-        <a href="#section-5" tabindex="-1" class="menu-item"><button data-target="section-5">Examples</button></a>
-        <a href="#section-6" tabindex="-1" class="menu-item"><button data-target="section-6">Create</button></a>
-        <a href="#section-7" tabindex="-1" class="menu-item"><button data-target="section-7">About</button></a>
-        <a href="#section-8" tabindex="-1" class="menu-item"><button data-target="section-8">Docs</button></a>
-        <a href="#section-9" tabindex="-1" class="menu-item"><button data-target="section-9">FAQ</button></a>
-      </div>
+      <nav class="menu" aria-label="Main">
+        <ul class="menu-list">
+          <li><a href="/login.php" class="menu-item menu-login">Login</a></li>
+          <li><a href="#section-2" class="menu-item">HAX</a></li>
+          <li><a href="#section-3" class="menu-item">Usage</a></li>
+          <li><a href="#section-4" class="menu-item">Users</a></li>
+          <li><a href="#section-4b" class="menu-item">Impact</a></li>
+          <li><a href="#section-5" class="menu-item">Examples</a></li>
+          <li><a href="#section-6" class="menu-item">Create</a></li>
+          <li><a href="#section-7" class="menu-item">About</a></li>
+          <li><a href="#section-8" class="menu-item">Docs</a></li>
+          <li><a href="#section-9" class="menu-item">FAQ</a></li>
+        </ul>
+      </nav>
     </header>
     <main>
       <page-section id="section-1" full class="section top" filter accent-color="blue" fold scroller scroller-label="Let's learn about HAX" image="${makeUrl('images/lion-statue.webp')}">
         <h1><span class="text">Create <future-terminal-text white glitch class="create">WEBSITES</future-terminal-text></span>
-          <div>
+          <span class="line">
             <span class="text">with </span><future-terminal-text glitch class="hax">HAX</future-terminal-text>
-          </div>
+          </span>
         </h1>
         <p slot="entice">Part of <strong>Penn State</strong>?</p>
         <simple-cta slot="entice" id="psubtn" link="/login.php">Login</simple-cta>
@@ -855,7 +935,7 @@ hax start
         </div>
         ` : nothing}
       </page-section>
-      <page-section id="section-4" accent-color="blue" bg="var(--primary-color-2)" image="" scroller scroller-label="Examples built with HAX" filter fold class="section">
+      <page-section id="section-4" accent-color="blue" bg="var(--primary-color-2)" image="" scroller scroller-label="Institutional impact" filter fold class="section">
         <h2>Built for every role at Penn State</h2>
         <grid-plate layout="1-1-1" style="margin-top:40px;">
           <p slot="col-1">
@@ -899,7 +979,7 @@ hax start
       <page-section id="section-7" class="section" preset="lines">
         <grid-plate layout="1-1">
           <div slot="col-1">
-            <h3>About</h3>
+            <h2>About</h2>
             <p>
               HAX is a service provided through a collaboration between 
               <a href="https://arts.psu.edu/" target="_blank"><mark>Penn State College of Arts and Architecture</mark></a>,
@@ -909,11 +989,11 @@ hax start
               <a href="https://libraries.psu.edu/" target="_blank"><strong>University Libraries</strong></a>.
               The platform is powered by <em>HAXcms</em>, originally developed to power 100s of high scale online courses.
             </p>
-            <h4>Interested in collaboration?</h4>
+            <h3>Interested in collaboration?</h3>
             <p>Contact <a href="mailto:bmr1@psu.edu">Bill Rose, Product Owner</a>.</p>
           </div>
           <div slot="col-2">
-            <h3>Privacy policy</h3>
+            <h2>Privacy policy</h2>
             <p>
             Penn State IT does not monitor websites and does not assume responsibility for any published content.
             The content authors are responsible for the content of their websites.
@@ -1024,11 +1104,11 @@ hax start
         </div>
         <div class="footer-left">
           <ul class="footer-links">
-            <li><a href="https://www.psu.edu/web-privacy-statement" role="link">Privacy Statement</a></li>
-            <li><a href="https://policy.psu.edu/policies/ad85" role="link">Non Discrimination</a></li>
-            <li><a href="https://www.psu.edu/accessibilitystatement" role="link">Accessibility</a></li>
-            <li><a href="https://policy.psu.edu/policies/hr11" role="link">Equal Opportunity</a></li>
-            <li><a href="https://www.psu.edu/legal-statements" role="link">Legal Statements</a></li>
+            <li><a href="https://www.psu.edu/web-privacy-statement">Privacy Statement</a></li>
+            <li><a href="https://policy.psu.edu/policies/ad85">Non Discrimination</a></li>
+            <li><a href="https://www.psu.edu/accessibilitystatement">Accessibility</a></li>
+            <li><a href="https://policy.psu.edu/policies/hr11">Equal Opportunity</a></li>
+            <li><a href="https://www.psu.edu/legal-statements">Legal Statements</a></li>
           </ul>
           <ul class="footer-bottom">
             <li><a href="https://www.psu.edu/copyright-information/index.html" role="link">The Pennsylvania State University © <span id="YEAR">${this.year}</span></a></li>
@@ -1037,11 +1117,18 @@ hax start
           </ul>
         </div>
       </div>
-      <scroll-button id="top" label="Top"></scroll-button>
+      <scroll-button id="top" label="Back to top"></scroll-button>
     </footer>
     `;
   }
 }
+function prefersReducedMotion() {
+  return Boolean(
+    globalThis.matchMedia &&
+      globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+}
+
 // make URL for build routine accurate
 function makeUrl(path) {
   return new URL(`../assets/${path}`, import.meta.url).href;
