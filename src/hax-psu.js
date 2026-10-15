@@ -45,6 +45,7 @@ export class HaxPsu extends DDD {
       .logo {
         transition: all 0.3s ease-in-out;
         width: 200px;
+        height: auto;
         top: 0;
         left: 0;
       }
@@ -635,8 +636,14 @@ export class HaxPsu extends DDD {
       import("@haxtheweb/play-list/play-list.js");
       import("@haxtheweb/grid-plate/grid-plate.js");
       import("@haxtheweb/count-up/count-up.js");
-      import("@haxtheweb/video-player/video-player.js");
-      import("@haxtheweb/rpg-character/rpg-character.js");
+      // video-player (~175KB chunk) and rpg-character are below the fold;
+      // only fetch them when they are about to be seen.
+      this.loadWhenNear("#section-6", () =>
+        import("@haxtheweb/video-player/video-player.js"),
+      );
+      this.loadWhenNear(".rpg-container", () =>
+        import("@haxtheweb/rpg-character/rpg-character.js"),
+      );
       this.renderExamplesTemplate();
       setTimeout(() => {
         if (this.shadowRoot && window.location.hash) {
@@ -647,6 +654,43 @@ export class HaxPsu extends DDD {
         }
       }, 1000);
     }, 0);
+  }
+
+  // run loader() once the element matching selector is close to (or inside)
+  // the viewport. rpg-character sits inside a closed <details>, which has no
+  // layout box until opened, so we also listen for the details toggle.
+  loadWhenNear(selector, loader) {
+    const target = this.shadowRoot.querySelector(selector);
+    let loaded = false;
+    const load = () => {
+      if (!loaded) {
+        loaded = true;
+        loader();
+      }
+    };
+    if (!target || !("IntersectionObserver" in globalThis)) {
+      load();
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          io.disconnect();
+          load();
+        }
+      },
+      { rootMargin: "600px 0px" },
+    );
+    io.observe(target);
+    const details = target.closest("details");
+    if (details) {
+      details.addEventListener("toggle", () => {
+        if (details.open) {
+          io.disconnect();
+          load();
+        }
+      });
+    }
   }
 
     // because of how processed <template> tags work in lit (illegal) we have to specialized way of rendering
@@ -745,7 +789,7 @@ export class HaxPsu extends DDD {
     <header>
       <div class="logo-wrapper">
         <a href="https://www.psu.edu" title="Penn State" role="link">
-          <img loading="lazy" decoding="async" fetchpriority="low" src="${makeUrl('images/Penn-State-Mark.png')}" alt="Nittany Lion Shield Penn State Mark" class="logo" />
+          <img decoding="async" width="400" height="126" src="${makeUrl('images/Penn-State-Mark.png')}" alt="Nittany Lion Shield Penn State Mark" class="logo" />
         </a>
       </div>
       <div class="menu">
@@ -762,7 +806,7 @@ export class HaxPsu extends DDD {
       </div>
     </header>
     <main>
-      <page-section id="section-1" full class="section top" filter accent-color="blue" fold scroller scroller-label="Let's learn about HAX" image="${makeUrl('images/lion-statue.jpg')}">
+      <page-section id="section-1" full class="section top" filter accent-color="blue" fold scroller scroller-label="Let's learn about HAX" image="${makeUrl('images/lion-statue.webp')}">
         <h1><span class="text">Create <future-terminal-text white glitch class="create">WEBSITES</future-terminal-text></span>
           <div>
             <span class="text">with </span><future-terminal-text glitch class="hax">HAX</future-terminal-text>
@@ -975,7 +1019,7 @@ hax start
       <div class="footer-inner">
         <div class="footer-logo">
           <a href="https://www.psu.edu" title="Penn State" role="link">
-            <img loading="lazy" decoding="async" fetchpriority="high" src="${makeUrl('images/Penn-State-Mark.png')}" alt="Nittany Lion Shield Penn State Mark" class="logo" />
+            <img loading="lazy" decoding="async" width="400" height="126" src="${makeUrl('images/Penn-State-Mark.png')}" alt="Nittany Lion Shield Penn State Mark" class="logo" />
           </a>
         </div>
         <div class="footer-left">
@@ -989,7 +1033,7 @@ hax start
           <ul class="footer-bottom">
             <li><a href="https://www.psu.edu/copyright-information/index.html" role="link">The Pennsylvania State University © <span id="YEAR">${this.year}</span></a></li>
             <li><a href="/login.php" role="link">Login</a></li>
-            <li class="footer-svg"><img loading="lazy" decoding="async" fetchpriority="high" src="${makeUrl('images/we-are-penn-state.svg')}" alt="We Are Penn State"></li>
+            <li class="footer-svg"><img loading="lazy" decoding="async" src="${makeUrl('images/we-are-penn-state.svg')}" alt="We Are Penn State"></li>
           </ul>
         </div>
       </div>

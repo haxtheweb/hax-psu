@@ -43,6 +43,15 @@ DirectoryIndex index.php index.html
   AddType application/javascript .js.br
   AddType application/octet-stream .symbols.json.br
 </IfModule>
+# Compress text responses on the fly. The rewrite rules further down only
+# help when a pre-built .gz sibling exists, which the rollup build does not
+# emit, so without this the HTML, JS chunks, JSON, SVG icons and llms.txt
+# all ship uncompressed.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml text/markdown
+  AddOutputFilterByType DEFLATE text/javascript application/javascript application/json
+  AddOutputFilterByType DEFLATE application/manifest+json application/xml image/svg+xml
+</IfModule>
 # Cache policy is set explicitly via Cache-Control headers below (mod_headers).
 # The previous ExpiresDefault A1209600 catch-all was removed because it
 # cascaded into the /cdn/ subtree and competed with the CDN's own policy.
