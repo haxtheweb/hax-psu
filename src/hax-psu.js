@@ -889,7 +889,7 @@ hax start
       </page-section>
       <page-section id="section-5" class="section" scroller scroller-label="Watch how to make a site">
         <h2>Examples</h2>
-        <p>Here are some example of real courses and websites using HAX in production.</p>
+        <p>Here are some examples of real courses and websites using HAX in production.</p>
         <play-list id="examplestemplate" loop pagination></play-list>
       </page-section>
       <page-section id="section-6" class="section" preset="video">
@@ -903,10 +903,10 @@ hax start
             <p>
               HAX is a service provided through a collaboration between 
               <a href="https://arts.psu.edu/" target="_blank"><mark>Penn State College of Arts and Architecture</mark></a>,
-              <a href="https://ist.psu.edu/" target="_blank"><mark data-primary="1">College of Information Sciences and Technology</mark></a>, and
+              <a href="https://ist.psu.edu/" target="_blank"><mark data-primary="1">College of Information Sciences and Technology</mark></a>,
               <a href="https://ed.psu.edu/" target="_blank"><mark data-primary="18">College of Education</mark></a>,
-              <a href="https://science.psu.edu/" target="_blank"><strong>Eberly College of Science</strong></a>,
-              <a href="https://libraries.psu.edu/" target="_blank"><strong>University libraries</strong></a>.              ,
+              <a href="https://science.psu.edu/" target="_blank"><strong>Eberly College of Science</strong></a>, and
+              <a href="https://libraries.psu.edu/" target="_blank"><strong>University Libraries</strong></a>.
               The platform is powered by <em>HAXcms</em>, originally developed to power 100s of high scale online courses.
             </p>
             <h4>Interested in collaboration?</h4>
@@ -1007,7 +1007,7 @@ hax start
               <rpg-character></rpg-character>
             </div>
             <p>Much like 8-bit video games were designed to be approachable and fun for all ages,
-              HAX is designed to be approachable and fun for all skill levels!Each RPG style character is unique to the user logging in and helps provide a humanizing touch. Websites produced by HAX can be a mix of professional and playful
+              HAX is designed to be approachable and fun for all skill levels! Each RPG style character is unique to the user logging in and helps provide a humanizing touch. Websites produced by HAX can be a mix of professional and playful
               but the 8-bit design helps you designate between the admin task and what end-users see.
             </p>
             </div>
