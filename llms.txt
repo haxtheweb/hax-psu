@@ -15,10 +15,20 @@ Key facts:
 
 ## Get started
 
+<<<<<<< HEAD
 - [Log in to HAX at Penn State](https://hax.psu.edu/login.php): Penn State WebAccess sign-in; creates or opens your HAX sites.
 - [Try HAX without an account](https://hax.cloud): Public demo of the HAX editor.
 - [HAX CLI](https://www.npmjs.com/package/@haxtheweb/create): `npm install --global @haxtheweb/create` then `hax start` to build HAX sites locally.
 - [Create your first site in 20 seconds (video)](https://www.youtube.com/watch?v=fZK3UiOcvag)
+=======
+- [Log in / Start](https://hax.psu.edu/login.php): Penn State WebAccess single sign-on entry to the HAXcms authoring service.
+- [Try HAX (demo)](https://hax.cloud): No-login demo of the HAX editor on HAX.cloud.
+- [Learn HAX](https://haxtheweb.org): Official HAX documentation site (a HAXcms site) — philosophy, pillars, tutorials, component reference.
+- [HAX Documentation](https://haxtheweb.org/ddd): DDD design system reference.
+- [HAX CLI](https://www.npmjs.com/package/@haxtheweb/create): `npm install @haxtheweb/create --global` then `hax help`.
+- [Unified issue queue](https://github.com/haxtheweb/issues): All HAX ecosystem bugs, features, and discussion.
+- [Community Discord](https://discord.gg/aCGxmRHEJP): Chat with the HAX community.
+>>>>>>> c0f7364 (build up)
 
 ## Documentation
 

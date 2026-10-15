@@ -1039,7 +1039,7 @@ hax start
               How do I join the community?
             </summary>
             <p>
-              Join our community Discord channel to get support from the community and the HAX team. <a href="https://discord.gg/EKYJAjqGhf">Join the HAX Discord</a>
+              Join our community Discord channel to get support from the community and the HAX team. <a href="https://discord.gg/aCGxmRHEJP">Join the HAX Discord</a>
             </p>
           </details>
           <details>

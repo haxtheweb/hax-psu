@@ -108,7 +108,7 @@ To refresh the published skills after they change in `praw`, run `npm run build:
 ## Issues & community
 
 - **Unified issue queue**: all HAX ecosystem issues live at `haxtheweb/issues`. Use `gh issue list` / `gh issue create` (GitHub CLI is pre-installed — read its output directly, don't ask the user to verify).
-- **Discord**: https://discord.gg/EKYJAjqGhf
+- **Discord**: https://discord.gg/aCGxmRHEJP
 - **Docs**: https://haxtheweb.org/
 
 ## Security

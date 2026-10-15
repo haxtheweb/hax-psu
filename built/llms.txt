@@ -14,7 +14,7 @@ This repository (`hax-psu`) is the public front door for HAX at Penn State at ht
 - [HAX Documentation](https://haxtheweb.org/ddd): DDD design system reference.
 - [HAX CLI](https://www.npmjs.com/package/@haxtheweb/create): `npm install @haxtheweb/create --global` then `hax help`.
 - [Unified issue queue](https://github.com/haxtheweb/issues): All HAX ecosystem bugs, features, and discussion.
-- [Community Discord](https://discord.gg/EKYJAjqGhf): Chat with the HAX community.
+- [Community Discord](https://discord.gg/aCGxmRHEJP): Chat with the HAX community.
 
 ## Agent discovery (machine-readable)
 

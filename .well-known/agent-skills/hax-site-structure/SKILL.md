@@ -27,6 +27,13 @@ ground-truth skill for understanding a site you did not build.
 - Computing the correct base path for a site.
 - Figuring out which files are safe to read vs. which are generated and should be rebuilt.
 
+## Start here (local site folder)
+
+When you have the site's files and the `hax` CLI, run `hax site` from the site root first (or
+`hax site --format json --to-file stats.json` for machine-readable output). It reports the title,
+theme, page count, which agent files exist, which files are authored vs managed, and the
+scriptable commands (all with `--y --no-i`). Then read `AGENTS.md` and `llms.txt`.
+
 ## Canonical structure
 
 A HAXsite is a directory with this shape (the HAXcms boilerplate):
@@ -77,9 +84,12 @@ Key rules for reading items:
 
 ## Page content
 
-- Authored HTML lives at the `location` path, conventionally `pages/<item-id>/index.html`.
-- A markdown alternate may exist alongside it (`getPageAlternateLocation(location, 'md')`). When
-  present, prefer it for LLM reading; it is the clean content without editor chrome.
+- Authored HTML lives at the `location` path, conventionally `pages/<item-id>/index.html`. It is the
+  only source of truth for the page's content.
+- The other files in the page directory (`index.md`, `index.json`, `index.yaml`, `index.xml`) are
+  generated from `index.html` when the content changes through HAX tooling. The markdown alternate
+  (`getPageAlternateLocation(location, 'md')`) is convenient for LLM reading, but if it disagrees
+  with `index.html` (or is empty), `index.html` wins.
 - Page content is authored with HAX-capable web components (see hax-content-authoring). Read it as
   HTML; the component tags autoload via the registry.
 
@@ -108,7 +118,8 @@ The `x/` route prefix is reserved for internal HAXcms paths (`x/search`, `x/tags
 ## Generated vs authored (short version)
 
 - Authored (safe to read/edit directly): `site.json` (via CLI, not hand-edit), `pages/*/index.html`
-  (content), `files/`, `theme/`, `custom/`.
+  (content, the only source of truth), `files/`, `theme/`, `custom/`.
+- Generated per page: `pages/*/index.md|json|yaml|xml`, rebuilt from `index.html` on content saves.
 - Generated (rebuild, do not hand-edit): `llms.txt`, `robots.txt`, `sitemap*.xml`, `rss.xml`,
   `atom.xml`, `lunrSearchIndex.json`, `manifest.json`, `service-worker.js`, `push-manifest.json`,
   `wc-registry.json`, `.well-known/*`, `build*.js`, `index.html`/`404.html`/`ghpages.html`
