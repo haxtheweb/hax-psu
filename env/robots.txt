@@ -1,6 +1,33 @@
+# robots.txt for https://hax.psu.edu/
+#
+# AI assistants and agents: a plain-text guide to this site is at
+#   https://hax.psu.edu/llms.txt       (link map + key facts)
+#   https://hax.psu.edu/llms-full.txt  (full homepage content as Markdown)
+# and curated HAX agent skills are indexed at
+#   https://hax.psu.edu/.well-known/agent-skills/index.json
+
+# AI search / answer engines and user-initiated fetchers. These fetch pages
+# to answer a person's question and cite the source.
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /login.php
+Disallow: /webhook.php
+Disallow: /stats/
+
+# Everyone else (search engines and other crawlers).
 User-agent: *
-Crawl-delay: 10
-# CSS, JS, Images
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /.well-known/
+# Rendering assets: crawlers that execute JS (Googlebot, Bingbot) need these
+# to see the page the way people do.
 Allow: /assets/*.css$
 Allow: /assets/*.css?
 Allow: /assets/*.js$
@@ -9,19 +36,16 @@ Allow: /assets/*.gif
 Allow: /assets/*.jpg
 Allow: /assets/*.jpeg
 Allow: /assets/*.png
-
-Allow: /theme/*.css$
-Allow: /theme/*.css?
-Allow: /theme/*.js$
-Allow: /theme/*.js?
-Allow: /theme/*.gif
-Allow: /theme/*.jpg
-Allow: /theme/*.jpeg
-Allow: /theme/*.png
-
+Allow: /assets/*.webp
+Allow: /assets/*.avif
+Allow: /assets/*.svg
+Allow: /assets/*.ico
 Disallow: /assets/
+Disallow: /login.php
+Disallow: /webhook.php
+Disallow: /stats/
 Disallow: /build/
 Disallow: /dist/
 Disallow: /node_modules/
-Disallow: /pages/
-Disallow: /theme/
+
+Sitemap: https://hax.psu.edu/sitemap.xml

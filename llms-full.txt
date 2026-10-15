@@ -1,0 +1,111 @@
+# HAX at Penn State
+
+> Penn State's free, open-source website builder. Students, faculty and staff publish accessible course sites, portfolios and project sites with no coding required. Canonical page: https://hax.psu.edu/
+
+This is the full text of the hax.psu.edu homepage as Markdown, for AI assistants and other clients that do not run JavaScript. A shorter link map is at https://hax.psu.edu/llms.txt.
+
+## What is HAX?
+
+**A standards-based publishing platform for web authoring and content ownership.**
+
+HAX is Penn State's free, open-source web authoring platform for accessible, standards-based publishing. It helps teams publish faster without sacrificing quality, through portable content and long-term ownership that is not tied to a single vendor.
+
+HAX supports teaching, research, outreach and student development with a shared platform that scales from one course site to institution-wide initiatives. The platform is powered by HAXcms, originally developed to power hundreds of high-scale online courses. HAX stands for Headless Authoring eXperience.
+
+## Get started
+
+- **Part of Penn State?** [Log in with your Penn State account](https://hax.psu.edu/login.php) to get started immediately.
+- **Not at Penn State?** [Try the HAX editor](https://hax.cloud) without an account, or self-host HAX: all you need is a web server and a domain name.
+- **Prefer the command line?**
+
+  ```bash
+  npm install --global @haxtheweb/create
+  hax start
+  ```
+
+- **Got 20 seconds?** Watch [creating your first HAX site in 20 seconds](https://www.youtube.com/watch?v=fZK3UiOcvag).
+
+## Built for every role at Penn State
+
+- **Faculty**: Create and update accessible course materials quickly. Reuse content across semesters, keep ownership of your work, and focus on teaching instead of platform complexity.
+- **Students**: Build portfolios, resumes and project sites you can take with you beyond graduation. HAX is portable and lightweight, and gives students meaningful ways to learn by doing while contributing to a vibrant campus publishing community.
+- **Staff**: Build a department website, a project website, or a personal website for a short-term initiative. Set up a quick site about a project, download the site and host it on another server, or host content from GitHub or anywhere else. HAX helps you get your job done faster with less training.
+
+## Institutional impact
+
+HAX combines academic flexibility with operational discipline. It is supported through cross-college collaboration and designed for long-term maintainability.
+
+- Open-source and portable architecture that reduces vendor lock-in risk
+- Accessibility-forward publishing practices
+- Shared governance across participating units
+- Demonstrated adoption across courses, programs and public-facing sites
+
+To discuss adoption for your unit, email [bmr1@psu.edu](mailto:bmr1@psu.edu).
+
+## Usage
+
+The live homepage shows current counts of sites built, active users and unique pages, updated nightly from https://open-apis.hax.cloud/api/services/stats/haxPsuUsage.
+
+## Examples built with HAX
+
+Real courses and websites using HAX in production:
+
+| Site | Unit | Description |
+| --- | --- | --- |
+| [Customer Discovery 101](https://customerdiscovery101.launchbox.psu.edu/) | Invent Penn State | Launchbox |
+| [Eberly OER Courses](https://oer.courses.science.psu.edu/) | Eberly College of Science | Office of Digital Learning |
+| [AA 100](https://courses.hax.psu.edu/bto108/sites/aa100-su23/) | College of Arts and Architecture | Introduction to International Arts course |
+| [The Sea Voyage](https://tsv-dbfp.libraries.psu.edu) | University Libraries | Digital Beaumont & Fletcher |
+| [PHYS 211](https://oer.hax.psu.edu/lul29/sites/phys211/) | Eberly College of Science | Mechanics course |
+| [HAX Docs](https://haxtheweb.org/) | HAXcellence | Teaching with HAX |
+| [IST 256](https://oer.hax.psu.edu/bto108/sites/ist256/) | Information Sciences & Technology | Programming for the web course |
+
+## About
+
+HAX at Penn State is a service provided through a collaboration between the [College of Arts and Architecture](https://arts.psu.edu/), the [College of Information Sciences and Technology](https://ist.psu.edu/), the [College of Education](https://ed.psu.edu/), the [Eberly College of Science](https://science.psu.edu/) and [University Libraries](https://libraries.psu.edu/).
+
+Interested in collaboration? Contact [Bill Rose, Product Owner](mailto:bmr1@psu.edu).
+
+### Privacy policy
+
+Penn State IT does not monitor websites and does not assume responsibility for any published content. Content authors are responsible for the content of their websites. Use of this service is governed by [Penn State policies and guidelines](https://security.psu.edu/awareness/psu-policies/), including the [Penn State IT Web Services Policy (AD54)](https://policy.psu.edu/policies/ad54). All pages must comply with [Accessibility Standards, Policy AD69](https://policies.psu.edu/policies/ad69).
+
+## Learn more
+
+- [Full documentation and user blocks](https://haxtheweb.org/welcome)
+- [Migrating content to HAX](https://haxtheweb.org/tutorials/migrate-data-to-hax)
+- [Block tutorials](https://haxtheweb.org/tutorials/block-usage)
+- [The Gallery of Online Excellence](https://haxtheweb.org/the-gallery-of-online-excellence)
+- [HAX source code](https://github.com/haxtheweb) and [issue queue](https://github.com/haxtheweb/issues)
+
+## Frequently asked questions
+
+### Who can use HAX?
+
+Anyone, anywhere. HAX is open source, so all you need is a web server and a domain name to get started. HAX also supports publishing directly to GitHub Pages and other static publishing tools for advanced developer use cases. If you are part of Penn State, just [log in](https://hax.psu.edu/login.php) to get started immediately.
+
+### Who supports HAX?
+
+Internal to Penn State, the HAX user community is supported by a collaboration between several units, including the College of Arts and Architecture, the College of Information Sciences and Technology, the College of Education, the Eberly College of Science and University Libraries. HAX also receives contributions from groups outside Penn State, including Buttercups LLC and community members at large.
+
+### How do I join the community?
+
+Join the [HAX community Discord](https://discord.gg/EKYJAjqGhf) to get support from the community and the HAX team.
+
+### Why was HAX created?
+
+HAX is a response to a lack of products that meet the needs of producing accessible and engaging web content in online course environments. The university has a rich history of building a mix of custom, open-source and repurposed commercial products with varying success.
+
+HAX was born out of a university Request for Information (RFI) that sought to build a custom Drupal instructional content management system (iCMS). After requirements were gathered from stakeholders across the university, it was clear that the requirements were far beyond what any commercial product offered, and no vendors responded to the Request for Proposal that followed, so the best path forward was to build a new kind of solution.
+
+### How are decisions made?
+
+Decisions about the platform are influenced by the needs of students, faculty and staff, whether they take courses delivered on the platform or actively build material with it. The direction of HAX is steered by the Core Product Development team, which meets monthly and is made up of representatives from any group contributing development, design or other skills toward the platform's development and sustainment. To join the Core Product Development team, contact [Bill Rose, Product Owner](mailto:bmr1@psu.edu).
+
+### What's with the 8-bit RPG characters?
+
+The 8-bit look was a design challenge presented to four College of IST students in Spring 2022. They were asked to create an over-world design that was fun, inviting, creative and unique, and built an experience that is playful, easy to use, and feels more like playing a video game than building a website. Later releases became more professional while keeping that playful streak. Just as 8-bit games were designed to be approachable for all ages, HAX is designed to be approachable for all skill levels. Each RPG-style character is unique to the user logging in, and the 8-bit admin design helps distinguish authoring tasks from what site visitors see.
+
+## Footer
+
+The Pennsylvania State University. [Privacy Statement](https://www.psu.edu/web-privacy-statement) · [Non Discrimination](https://policy.psu.edu/policies/ad85) · [Accessibility](https://www.psu.edu/accessibilitystatement) · [Equal Opportunity](https://policy.psu.edu/policies/hr11) · [Legal Statements](https://www.psu.edu/legal-statements)
