@@ -6,22 +6,41 @@
 # and curated HAX agent skills are indexed at
 #   https://hax.psu.edu/.well-known/agent-skills/index.json
 
-# AI search / answer engines and user-initiated fetchers. These fetch pages
-# to answer a person's question and cite the source.
+# hax.psu.edu exists to be discovered: every major search engine, AI search
+# / answer engine, user-initiated assistant fetcher and AI training crawler is
+# welcome here. (HAX sites on other hax.psu.edu subdomains set their own rules.)
+# Listing them explicitly documents that intent; the rules match the
+# catch-all group below.
+User-agent: Googlebot
+User-agent: Google-Extended
+User-agent: Bingbot
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: DuckDuckBot
+User-agent: DuckAssistBot
+User-agent: GPTBot
 User-agent: OAI-SearchBot
 User-agent: ChatGPT-User
+User-agent: ClaudeBot
 User-agent: Claude-SearchBot
 User-agent: Claude-User
 User-agent: PerplexityBot
 User-agent: Perplexity-User
-User-agent: DuckAssistBot
+User-agent: CCBot
+User-agent: Meta-ExternalAgent
+User-agent: Amazonbot
+User-agent: MistralAI-User
 Allow: /
 Disallow: /login.php
 Disallow: /webhook.php
 Disallow: /stats/
 
-# Everyone else (search engines and other crawlers).
+# Everyone else.
 User-agent: *
+# Content Signals (https://contentsignals.org): search, AI answers and AI
+# training are all explicitly permitted. Crawlers that don't know this line
+# ignore it.
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 Allow: /llms.txt
 Allow: /llms-full.txt

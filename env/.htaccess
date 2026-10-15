@@ -13,6 +13,8 @@ Options -Indexes
 Options +FollowSymLinks
 # Set the default handler.
 DirectoryIndex index.php index.html
+# Real 404s with a small, self-contained page (env/404.html -> built/404.html).
+ErrorDocument 404 /404.html
 # Override PHP settings that cannot be changed at runtime. See
 <IfModule mod_php5.c>
   php_flag magic_quotes_gpc                 off
@@ -79,10 +81,10 @@ DirectoryIndex index.php index.html
   RewriteCond %{HTTP:Accept} text/markdown [NC]
   RewriteCond %{HTTP:Accept} !text/html [NC]
   RewriteRule ^(index\.(html|php))?$ llms-full.txt [L,E=markdown_request:1]
-  # Pass all requests not referring directly to files in the filesystem to
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^ . [L]
+  # No SPA catch-all: the homepage only uses #hash navigation and the
+  # backend is real files (login.php, webhook.php, stats/), so unknown paths
+  # get a real 404 (see ErrorDocument below) instead of the homepage with a
+  # 200, which search engines and AI crawlers treat as a soft 404 / duplicate.
 
   # Rules to correctly serve gzip compressed CSS and JS files.
   # Requires both mod_rewrite and mod_headers to be enabled.
