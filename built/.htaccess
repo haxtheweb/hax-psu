@@ -13,6 +13,8 @@ Options -Indexes
 Options +FollowSymLinks
 # Set the default handler.
 DirectoryIndex index.php index.html
+# Real 404s with a small, self-contained page (env/404.html -> built/404.html).
+ErrorDocument 404 /404.html
 # Override PHP settings that cannot be changed at runtime. See
 <IfModule mod_php5.c>
   php_flag magic_quotes_gpc                 off
@@ -25,6 +27,10 @@ DirectoryIndex index.php index.html
 </IfModule>
 # fix for wasm
 <IfModule mod_mime.c>
+  # llms.txt / llms-full.txt are UTF-8 Markdown; without a charset some
+  # clients mangle punctuation, and .md should not download as a binary.
+  AddCharset utf-8 .txt .md
+  AddType text/markdown .md
   RemoveType .gz
   AddEncoding gzip .gz
   # The correct MIME type for .data.gz would be application/octet-stream, but due to Safari bug https://bugs.webkit.org/show_bug.cgi?id=247421, it is preferable to use MIME Type application/gzip instead.
@@ -43,6 +49,15 @@ DirectoryIndex index.php index.html
   AddType application/javascript .js.br
   AddType application/octet-stream .symbols.json.br
 </IfModule>
+# Compress text responses on the fly. The rewrite rules further down only
+# help when a pre-built .gz sibling exists, which the rollup build does not
+# emit, so without this the HTML, JS chunks, JSON, SVG icons and llms.txt
+# all ship uncompressed.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml text/markdown
+  AddOutputFilterByType DEFLATE text/javascript application/javascript application/json
+  AddOutputFilterByType DEFLATE application/manifest+json application/xml image/svg+xml
+</IfModule>
 # Cache policy is set explicitly via Cache-Control headers below (mod_headers).
 # The previous ExpiresDefault A1209600 catch-all was removed because it
 # cascaded into the /cdn/ subtree and competed with the CDN's own policy.
@@ -60,10 +75,16 @@ DirectoryIndex index.php index.html
   # Make sure Authorization HTTP header is available to PHP
   # even when running as CGI or FastCGI.
   RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-  # Pass all requests not referring directly to files in the filesystem to
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^ . [L]
+  # Markdown content negotiation: agents that ask for the homepage with
+  # "Accept: text/markdown" (and not text/html) get the Markdown twin of the
+  # page instead of the JS app shell. Browsers always send text/html.
+  RewriteCond %{HTTP:Accept} text/markdown [NC]
+  RewriteCond %{HTTP:Accept} !text/html [NC]
+  RewriteRule ^(index\.(html|php))?$ llms-full.txt [L,E=markdown_request:1]
+  # No SPA catch-all: the homepage only uses #hash navigation and the
+  # backend is real files (login.php, webhook.php, stats/), so unknown paths
+  # get a real 404 (see ErrorDocument below) instead of the homepage with a
+  # 200, which search engines and AI crawlers treat as a soft 404 / duplicate.
 
   # Rules to correctly serve gzip compressed CSS and JS files.
   # Requires both mod_rewrite and mod_headers to be enabled.
@@ -93,11 +114,17 @@ DirectoryIndex index.php index.html
 # FilesMatch rules would also hit /cdn/ assets.)
 <IfModule mod_setenvif.c>
   SetEnvIf Request_URI ^/cdn/ cdn_asset
+  SetEnvIf Request_URI ^/(index\.(html|php))?$ homepage_request
 </IfModule>
 # Add headers to all responses.
 <IfModule mod_headers.c>
   # Disable content sniffing, since it's an attack vector.
   Header always set X-Content-Type-Options nosniff
+  # The homepage varies by Accept (HTML app vs Markdown, see rewrite above);
+  # tell caches so they don't hand Markdown to a browser.
+  Header merge Vary Accept env=homepage_request
+  Header set Content-Type "text/markdown; charset=utf-8" env=REDIRECT_markdown_request
+  Header set Content-Type "text/markdown; charset=utf-8" env=markdown_request
   # Long, immutable cache for content-hashed rollup assets (entry/chunks
   # are emitted as [hash].js / [hash].css — safe to cache for a year).
   # env=!cdn_asset keeps these OFF the /cdn/ subtree.

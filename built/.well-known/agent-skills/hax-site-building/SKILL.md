@@ -3,12 +3,14 @@ name: hax-site-building
 description: >
   Build and maintain HAXcms sites with proper structure, themes, and JSON Outline Schema.
   Use when creating a new HAXsite, editing site.json, managing page content, or modifying themes
-  in the HAXcms ecosystem.
-version: 1.0.0
+  in the HAXcms ecosystem. Use when the user says "create a site", "add pages", "edit site.json",
+  or references HAXcms site structure.
+version: 1.1.0
 license: Apache-2.0
 metadata:
   author: haxtheweb
   tags: [hax, haxcms, site, json-outline-schema, theme, jos]
+  source: create
 ---
 
 # HAX Site Building
@@ -28,11 +30,23 @@ Build and maintain HAXcms sites with proper structure, themes, and JSON Outline 
 
 1. **Scaffold**: Always use `hax site mysite --y` instead of manual creation. Do not create site directories or files manually.
 2. **Structure**: Keep all documentation in `docs/`, all files in `files/`, and all page HTML in `pages/`. Maintain `site.json` in JSON Outline Schema format.
-3. **Metadata**: Ensure `metadata.site.name` aligns exactly with the folder name. Do not modify it to anything else.
-4. **Routes**: Do not create pages or routes using the `x/` prefix — it is reserved for internal HAXcms paths (`x/search`, `x/tags`, `x/manifest`).
+3. **Metadata**: Ensure `metadata.site.name` aligns exactly with the folder name. Do not modify it to anything else. (PRAW Rule `rHQ7lLRZmZlnFveLrWslUN`)
+4. **Routes**: Do not create pages or routes using the `x/` prefix — it is reserved for internal HAXcms paths (`x/search`, `x/tags`, `x/manifest`). (PRAW Rule `Q4D9hL9sFNORlMPt1z2ZEb`)
 5. **Content**: Use HAX-capable web components for rich content. Apply DDD attributes for consistent spacing and typography. Include engaging visual elements (videos, tables, interactive components).
 6. **Theme**: Use HAXCMSLitElement for custom theme components. Apply DDD design tokens consistently. Run `yarn run build` after theme changes.
 7. **Import**: Use supported import methods (`pressbooksToSite`, `htmlToSite`, `notionToSite`, `docxToSite`, etc.) via `hax site --import-site <url> --import-structure <method>`.
+
+## Page creation (critical)
+
+Always create pages through the `hax` CLI, never by manually creating page directories or hand-editing `site.json`. Manual page creation bypasses the CLI's page-id generation, slug/location management, and atomic `site.json` updates, which corrupts the JSON Outline Schema structure and breaks the site in production. The CLI owns page structure; you only own page content.
+
+Two supported CLI paths, run from inside the site directory:
+
+- Single page: `hax site node:add --title "<title>" --slug "<slug>" --parent <parent-id-or-slug> --content <path-to-html-or-md-file> --y --no-i`. Without `--order` the page is appended after its siblings. The output includes the new item id.
+- Update an existing page: `hax site node:edit --item-id <id-or-slug> --title "<title>" --content <file-or-html> --y --no-i` (any of `--title`, `--slug`, `--content`, `--description`, `--tags`, `--parent`, `--order`, `--published`, `--hide-in-menu`, `--theme`, applied together).
+- Bulk (preferred for a whole program): build a JOS items array (one object per page with `title`, `slug`, `parent`, `indent`, `order`, `metadata`, and `content`), then run `hax site site:items-import --items-import <items.json> --y --no-i`. The import remaps parent references to the newly generated ids automatically.
+
+To mark a page draft/private (e.g. verbatim transcripts), set `metadata.published: false` in the import item. After creation, verify with `hax site site:items`. (PRAW Rule — see RULES.md "HAXcms page creation via CLI".)
 
 ## Educational Content Standards
 
@@ -52,5 +66,6 @@ When creating educational content:
 
 ## References
 
-- For site structure examples: `references/site-structure.md`
-- For import methods: `references/import-methods.md`
+- HAX CLI: `hax site --help`
+- PRAW RULES.md: `~/Documents/git/haxtheweb/praw/RULES.md` (canonical ecosystem rules referenced by Rule ID)
+- DDD design system: see the `hax-design-system` skill

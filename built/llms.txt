@@ -1,13 +1,26 @@
 # HAX at Penn State
 
-> Free, open source, forever — unleashing creativity in a sustainable way. HAX at Penn State gives students, faculty, and staff the ability to manage websites regardless of their technical experience. This is the hax.psu.edu homepage SPA (a rollup-built single-page app with a PHP backend), hosted and supported by a collaboration of multiple Penn State colleges and outside contributors.
+> HAX at Penn State (https://hax.psu.edu) is Penn State's free, open-source website builder. Penn State students, faculty and staff log in with their Penn State account to create accessible course sites, portfolios, project sites and department sites without writing code. It runs HAXcms from the open-source HAX ecosystem (HAXTheWeb) and is supported by a collaboration of Penn State colleges.
 
-## What this site is
+Key facts:
 
-This repository (`hax-psu`) is the public front door for HAX at Penn State at https://hax.psu.edu/. It is NOT a HAXcms content site (there is no `site.json` or `pages/` directory here). It is a single-page application built with LitElement + the DDD design system, backed by a small PHP backend (`env/`) for login and a daily cron. The HAXcms authoring platform, documentation, and course sites live elsewhere in the ecosystem.
+- Cost: free for Penn State users; HAX itself is open source (Apache-2.0) and free for anyone to self-host.
+- Who can use hax.psu.edu: anyone with a Penn State account, via https://hax.psu.edu/login.php. Anyone else can try the editor at https://hax.cloud or self-host HAX.
+- Typical uses: course materials and open educational resources (OER), student portfolios and resumes, project and department sites.
+- Accessibility: published pages must meet Penn State Policy AD69 (Accessibility Standards); HAX is built with accessibility-forward authoring.
+- Portability: sites are plain files (HTML + JSON) that can be downloaded and hosted elsewhere, including GitHub Pages and other static hosts.
+- Supported by: College of Arts and Architecture, College of Information Sciences and Technology, College of Education, Eberly College of Science and University Libraries, with outside contributors including Buttercups LLC.
+- Contact: Bill Rose, Product Owner (bmr1@psu.edu), or hax@psu.edu. Community support on Discord.
+- Name: HAX stands for Headless Authoring eXperience. Also referred to as HAXcms, HAXTheWeb or "HAX @ PSU".
 
-## Key resources
+## Get started
 
+<<<<<<< HEAD
+- [Log in to HAX at Penn State](https://hax.psu.edu/login.php): Penn State WebAccess sign-in; creates or opens your HAX sites.
+- [Try HAX without an account](https://hax.cloud): Public demo of the HAX editor.
+- [HAX CLI](https://www.npmjs.com/package/@haxtheweb/create): `npm install --global @haxtheweb/create` then `hax start` to build HAX sites locally.
+- [Create your first site in 20 seconds (video)](https://www.youtube.com/watch?v=fZK3UiOcvag)
+=======
 - [Log in / Start](https://hax.psu.edu/login.php): Penn State WebAccess single sign-on entry to the HAXcms authoring service.
 - [Try HAX (demo)](https://hax.cloud): No-login demo of the HAX editor on HAX.cloud.
 - [Learn HAX](https://haxtheweb.org): Official HAX documentation site (a HAXcms site) — philosophy, pillars, tutorials, component reference.
@@ -15,53 +28,48 @@ This repository (`hax-psu`) is the public front door for HAX at Penn State at ht
 - [HAX CLI](https://www.npmjs.com/package/@haxtheweb/create): `npm install @haxtheweb/create --global` then `hax help`.
 - [Unified issue queue](https://github.com/haxtheweb/issues): All HAX ecosystem bugs, features, and discussion.
 - [Community Discord](https://discord.gg/aCGxmRHEJP): Chat with the HAX community.
+>>>>>>> c0f7364 (build up)
 
-## Agent discovery (machine-readable)
+## Documentation
 
-- [Agent skills index](https://hax.psu.edu/.well-known/agent-skills/index.json): agentskills.io discovery v0.2.0 index of the curated HAX skills published from this domain. Each entry has `name`, `description`, `url` (relative to the index), and `sha256` digest.
-- [Security policy](https://hax.psu.edu/.well-known/security.txt): RFC 9116 security contact information.
-- [Sitemap](https://hax.psu.edu/sitemap.xml): Published when generated.
+- [HAX documentation](https://haxtheweb.org/): Official docs (philosophy, tutorials, component reference).
+- [Getting started guide and user blocks](https://haxtheweb.org/welcome)
+- [Migrating content to HAX](https://haxtheweb.org/tutorials/migrate-data-to-hax)
+- [Block tutorials](https://haxtheweb.org/tutorials/block-usage)
+- [The Gallery of Online Excellence](https://haxtheweb.org/the-gallery-of-online-excellence)
+- [DDD design system](https://haxtheweb.org/ddd)
 
-## Curated HAX skills (install separately)
+## Examples built with HAX at Penn State
 
-The skills below are discoverable at `/.well-known/agent-skills/` on this domain and are maintained in the `haxtheweb/praw` repository. Install all of them, or pick individually:
+<!-- sync:examples:start -->
+- [Customer Discovery 101](https://customerdiscovery101.launchbox.psu.edu/): Invent Penn State, Launchbox
+- [Eberly OER Courses](https://oer.courses.science.psu.edu/): Eberly College of Science, Office of Digital Learning
+- [AA 100](https://courses.hax.psu.edu/bto108/sites/aa100-su23/): College of Arts and Architecture, Introduction to International Arts course
+- [The Sea Voyage](https://tsv-dbfp.libraries.psu.edu): University Libraries, Digital Beaumont & Fletcher
+- [PHYS 211](https://oer.hax.psu.edu/lul29/sites/phys211/): Eberly College of Science, Mechanics course
+- [HAX Docs](https://haxtheweb.org/): HAXcellence, Teaching with HAX
+- [IST 256](https://oer.hax.psu.edu/bto108/sites/ist256/): Information Sciences & Technology, Programming for the web Course
+<!-- sync:examples:end -->
 
-```bash
-npx skills add haxtheweb/praw --all
+## Support and community
 
-# Or install individually
-npx skills add haxtheweb/praw --skill hax-site-building
-npx skills add haxtheweb/praw --skill hax-claudehax
-```
+- [HAX community Discord](https://discord.gg/EKYJAjqGhf): Help from the community and the HAX team.
+- [Issue queue](https://github.com/haxtheweb/issues): Bugs, feature requests and discussion for the whole HAX ecosystem.
+- [Source code](https://github.com/haxtheweb): All HAX repositories.
+- [Security policy](https://hax.psu.edu/.well-known/security.txt): RFC 9116 security contact.
 
-The curated set (the "normal HAX site" skill set):
+## Policies
 
-- **hax-site-building**: HAXcms site creation and theme management
-- **hax-site-structure**: Read/navigate an existing HAXcms site from its portable files
-- **hax-design-system**: DDD design system application and SimpleColors migration
-- **hax-a11y-audit**: WCAG 2.0 AA diagnostic of authored HAX content
-- **hax-udl-audit**: Universal Design for Learning 3.0 diagnostic
-- **hax-content-authoring**: Author HAX page content with the right components/conventions
-- **hax-content-chunking-audit**: Cognitive-load / content-chunking diagnostic
-- **hax-managed-files**: Know which HAXcms files are generated vs authored (build footguns)
-- **hax-claudehax**: Operate HAX sites via the ClaudeHAX plugin / HAX CLI
-- **hax-webcomponent-dev**: Web component dev with LitElement, DDD, HAXSchema
-- **hax-ecosystem-onboarding**: New developer onboarding and environment setup
-- **hax-ubd-backward-design**: UbD backward design for HAX course units
-- **hax-ubd-stage1** / **hax-ubd-stage2** / **hax-ubd-stage3**: UbD Stage 1/2/3 workflows
-- **hax-ubd-essential-questions** / **hax-ubd-grasps** / **hax-ubd-six-facets**: UbD companions
-- **hax-ubd-unit-audit**: UbD diagnostic for an existing HAX site/unit
-- **oerschema-audit**: OER Schema diagnostic of authored content
-- **oerschema-integration-finder**: Scan components/backends for missing OER Schema emission
+- [Penn State IT Web Services Policy (AD54)](https://policy.psu.edu/policies/ad54)
+- [Accessibility Standards (AD69)](https://policies.psu.edu/policies/ad69)
+- [Penn State web privacy statement](https://www.psu.edu/web-privacy-statement)
 
-## Companion skills (install separately)
+## For AI agents and developers
 
-The Anthropic document skills (`docx`, `pdf`, `pptx`, `xlsx`) are source-available, not open source, and are NOT bundled here. Install them from Anthropic's official repo:
+- [Full homepage content as Markdown](https://hax.psu.edu/llms-full.txt): Everything on hax.psu.edu, including the FAQ, in one file.
+- [Agent skills index](https://hax.psu.edu/.well-known/agent-skills/index.json): agentskills.io discovery index of curated HAX skills (site building, content authoring, WCAG/UDL/UbD/OER Schema audits, web component development). Each skill's SKILL.md is served alongside it under /.well-known/agent-skills/<name>/. Install them all with `npx skills add haxtheweb/praw --all`.
 
-```bash
-npx skills add anthropics/skills --skill docx --skill pdf --skill pptx --skill xlsx -g -y
-```
+## Optional
 
-## Ecosystem context
-
-HAX (Headless Authoring eXperience) is a comprehensive web development ecosystem: a monorepo of 250+ LitElement web components, the HAXcms file-based CMS, the DDD design system, the HAX CLI (`@haxtheweb/create`), and HAX.cloud infrastructure. HAX is built on community pillars — Accessible, Extensible, Free and Open, Efficient, Platform Agnostic, Remixable, Sustainable — with deep roots in educational technology and OER (the 5Rs: Retain, Reuse, Revise, Remix, Redistribute).
+- [Sitemap](https://hax.psu.edu/sitemap.xml)
+- [HAX ecosystem overview](https://haxtheweb.org/): HAX is a monorepo of 250+ LitElement web components, the HAXcms file-based CMS, the DDD design system, the HAX CLI and HAX.cloud, built on the pillars Accessible, Extensible, Free and Open, Efficient, Platform Agnostic, Remixable and Sustainable.
