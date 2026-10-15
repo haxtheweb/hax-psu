@@ -2,9 +2,14 @@
 /**
  * Build .well-known/agent-skills/ for the hax.psu.edu homepage.
  *
- * Copies a curated allowlist of HAX skills (the "normal HAX site" set) from the
- * sibling ../praw/skills/<name>/ into self-contained .well-known/agent-skills/<name>/
- * and writes an agentskills.io discovery v0.2.0 index.json with sha256 digests.
+ * Copies a curated allowlist of HAX skills (the "normal HAX site" set) into
+ * self-contained .well-known/agent-skills/<name>/ and writes an agentskills.io
+ * discovery v0.2.0 index.json with sha256 digests.
+ *
+ * Each skill is resolved from the first source dir (see SKILL_SOURCES) that holds
+ * <name>/SKILL.md: sibling ../praw/skills/ first, then ../create/src/skills/.
+ * The interface skills (hax-claudehax, hax-site-building, hax-webcomponent-dev)
+ * moved to create in praw ffd4fd2 — create is their canonical source.
  *
  * Implements the agentskills.io discovery spec v0.2.0:
  *   https://github.com/cloudflare/agent-skills-discovery-rfc
@@ -63,6 +68,13 @@ const CURATED_SKILLS = [
 
 const repoRoot = path.resolve(__dirname, '..');
 const prawSkillsDir = path.resolve(repoRoot, '..', 'praw', 'skills');
+// Ordered skill source dirs; first match wins. praw is required, create is
+// optional but needed for the interface skills (hax-claudehax, hax-site-building,
+// hax-webcomponent-dev) whose canonical home is haxtheweb/create.
+const SKILL_SOURCES = [
+  { label: '../praw/skills', dir: prawSkillsDir },
+  { label: '../create/src/skills', dir: path.resolve(repoRoot, '..', 'create', 'src', 'skills') },
+];
 const outDir = path.join(repoRoot, '.well-known', 'agent-skills');
 const indexPath = path.join(outDir, 'index.json');
 
@@ -163,12 +175,19 @@ const warnings = [];
 
 for (let s = 0; s < CURATED_SKILLS.length; s++) {
   const dirName = CURATED_SKILLS[s];
-  const skillDir = path.join(prawSkillsDir, dirName);
-  const skillMdPath = path.join(skillDir, 'SKILL.md');
-  if (!fs.existsSync(skillMdPath)) {
-    warnings.push('MISSING SKILL.md in ../praw/skills/' + dirName);
+  let skillDir = null;
+  for (let i = 0; i < SKILL_SOURCES.length; i++) {
+    const candidate = path.join(SKILL_SOURCES[i].dir, dirName);
+    if (fs.existsSync(path.join(candidate, 'SKILL.md'))) {
+      skillDir = candidate;
+      break;
+    }
+  }
+  if (!skillDir) {
+    warnings.push('MISSING SKILL.md for ' + dirName + ' (looked in ' + SKILL_SOURCES.map(function (src) { return src.label; }).join(', ') + ')');
     continue;
   }
+  const skillMdPath = path.join(skillDir, 'SKILL.md');
   const content = fs.readFileSync(skillMdPath);
   const fm = parseFrontmatter(content.toString('utf8'));
   const name = fm && fm.name ? fm.name : dirName;
