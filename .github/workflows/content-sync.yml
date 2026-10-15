@@ -1,0 +1,33 @@
+name: Homepage content sync
+
+# Fails a PR when src/hax-psu.js (or src/examples.mjs) changed but the
+# generated no-JS / AI copies (index.html static block + FAQ JSON-LD,
+# llms-full.txt, llms.txt examples) were not regenerated.
+# Fix locally with: npm run sync:content
+
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'index.html'
+      - 'llms.txt'
+      - 'llms-full.txt'
+      - 'scripts/sync-static-content.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - run: npm run check:content

@@ -31,12 +31,15 @@ Key facts:
 
 ## Examples built with HAX at Penn State
 
+<!-- sync:examples:start -->
 - [Customer Discovery 101](https://customerdiscovery101.launchbox.psu.edu/): Invent Penn State, Launchbox
 - [Eberly OER Courses](https://oer.courses.science.psu.edu/): Eberly College of Science, Office of Digital Learning
-- [AA 100: Introduction to International Arts](https://courses.hax.psu.edu/bto108/sites/aa100-su23/): College of Arts and Architecture
-- [The Sea Voyage: Digital Beaumont & Fletcher](https://tsv-dbfp.libraries.psu.edu): University Libraries
-- [PHYS 211: Mechanics](https://oer.hax.psu.edu/lul29/sites/phys211/): Eberly College of Science
-- [IST 256: Programming for the Web](https://oer.hax.psu.edu/bto108/sites/ist256/): College of Information Sciences and Technology
+- [AA 100](https://courses.hax.psu.edu/bto108/sites/aa100-su23/): College of Arts and Architecture, Introduction to International Arts course
+- [The Sea Voyage](https://tsv-dbfp.libraries.psu.edu): University Libraries, Digital Beaumont & Fletcher
+- [PHYS 211](https://oer.hax.psu.edu/lul29/sites/phys211/): Eberly College of Science, Mechanics course
+- [HAX Docs](https://haxtheweb.org/): HAXcellence, Teaching with HAX
+- [IST 256](https://oer.hax.psu.edu/bto108/sites/ist256/): Information Sciences & Technology, Programming for the web Course
+<!-- sync:examples:end -->
 
 ## Support and community
 
