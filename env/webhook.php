@@ -53,6 +53,9 @@ switch ($_SERVER['CONTENT_TYPE']) {
         $json = $rawPost ?: file_get_contents('php://input');
         break;
     case 'application/x-www-form-urlencoded':
+        if (!isset($_POST['payload']) || !is_string($_POST['payload'])) {
+            throw new \Exception("Missing 'payload' field.");
+        }
         $json = $_POST['payload'];
         break;
     default:
@@ -71,8 +74,8 @@ switch (strtolower($_SERVER['HTTP_X_GITHUB_EVENT'])) {
 	    break;
     default:
         header('HTTP/1.0 404 Not Found');
-        echo "Event:$_SERVER[HTTP_X_GITHUB_EVENT] Payload:\n";
-        print_r($payload); # For debug only. Can be found in GitHub hook log.
+        header('Content-Type: text/plain; charset=utf-8');
+        echo 'Unsupported event';
         die();
 }
 ?>
