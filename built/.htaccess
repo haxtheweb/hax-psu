@@ -120,6 +120,13 @@ ErrorDocument 404 /404.html
 <IfModule mod_headers.c>
   # Disable content sniffing, since it's an attack vector.
   Header always set X-Content-Type-Options nosniff
+  # Clickjacking protection: only allow framing by the same origin.
+  Header always set X-Frame-Options SAMEORIGIN
+  Header always set Content-Security-Policy "frame-ancestors 'self'"
+  # Limit referrer leakage to other origins.
+  Header always set Referrer-Policy strict-origin-when-cross-origin
+  # Force HTTPS for returning visitors (ignored by browsers over plain HTTP).
+  Header always set Strict-Transport-Security "max-age=31536000"
   # The homepage varies by Accept (HTML app vs Markdown, see rewrite above);
   # tell caches so they don't hand Markdown to a browser.
   Header merge Vary Accept env=homepage_request

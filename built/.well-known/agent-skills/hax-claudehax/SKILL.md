@@ -9,7 +9,8 @@ version: 1.1.0
 license: Apache-2.0
 metadata:
   author: haxtheweb
-  tags: [hax, claudehax, claude-code, plugin, site-operations, content, assessments]
+  tags:
+    [hax, claudehax, claude-code, plugin, site-operations, content, assessments]
   source: create
 ---
 
@@ -58,6 +59,7 @@ Inside Claude Code:
    Should show `hax-site-ops` in the list.
 
 To update the plugin when a new version is released:
+
 ```
 /plugin update hax-site-ops
 ```
@@ -99,11 +101,14 @@ When operating outside the `/hax` slash command, use the HAX CLI directly:
 - `hax webcomponent <name> --y` — Scaffold a new component
 - `hax site <name> --y --no-i` — Create a new HAXsite
 - `hax audit` — DDD compliance audit
+- `hax audit schema` — validate site.json, skeletons, haxProperties, appstore.json and Merlin commands against the HAX schemas
+- `hax audit i18n` — find English hardcoded in Lit templates that should come from `this.t`
 - `hax skills list` — List bundled agent skills
 - `hax skills install <name|--all>` — Install bundled skills into `.agents/skills/`
 - `hax update` — Update HAX CLI
 
 **Automation flags** (always use when scripting to prevent interruptions):
+
 - `--y` or `--auto` — Auto-accept all prompts
 - `--no-i` — Prevent interactive sub-processes
 - `--skip` — Skip animations
@@ -139,6 +144,7 @@ Before changing anything:
 5. Identify available content.
 
 Look for files such as:
+
 - `site.json`
 - `package.json`
 - `haxcms.json`

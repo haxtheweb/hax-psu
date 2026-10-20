@@ -21,23 +21,26 @@ set_exception_handler(function($e) {
     die();
 });
 
-$rawPost = NULL;
-
-if ($hookSecret !== NULL) {
-    if (!isset($_SERVER['HTTP_X_HUB_SIGNATURE'])) {
-        throw new \Exception("HTTP header 'X-Hub-Signature' is missing.");
-    } elseif (!extension_loaded('hash')) {
-        throw new \Exception("Missing 'hash' extension to check the secret code validity.");
-    }
-    list($algo, $hash) = explode('=', $_SERVER['HTTP_X_HUB_SIGNATURE'], 2) + array('', '');
-    if (!in_array($algo, hash_algos(), TRUE)) {
-        throw new \Exception("Hash algorithm '$algo' is not supported.");
-    }
-    $rawPost = file_get_contents('php://input');
-    if (!hash_equals($hash, hash_hmac($algo, $rawPost, $hookSecret))) {
-        throw new \Exception('Hook secret does not match.');
-    }
-};
+// Fail closed: without a configured secret we cannot authenticate the sender.
+if ($hookSecret === false || $hookSecret === '') {
+    header('HTTP/1.1 500 Internal Server Error');
+    header('Content-Type: text/plain; charset=utf-8');
+    echo 'Webhook secret is not configured.';
+    exit;
+}
+if (!isset($_SERVER['HTTP_X_HUB_SIGNATURE_256'])) {
+    throw new \Exception("HTTP header 'X-Hub-Signature-256' is missing.");
+} elseif (!extension_loaded('hash')) {
+    throw new \Exception("Missing 'hash' extension to check the secret code validity.");
+}
+list($algo, $hash) = explode('=', $_SERVER['HTTP_X_HUB_SIGNATURE_256'], 2) + array('', '');
+if ($algo !== 'sha256') {
+    throw new \Exception('Only sha256 signatures are accepted.');
+}
+$rawPost = file_get_contents('php://input');
+if (!hash_equals(hash_hmac('sha256', $rawPost, $hookSecret), $hash)) {
+    throw new \Exception('Hook secret does not match.');
+}
 
 if (!isset($_SERVER['CONTENT_TYPE'])) {
     throw new \Exception("Missing HTTP 'Content-Type' header.");
@@ -50,6 +53,9 @@ switch ($_SERVER['CONTENT_TYPE']) {
         $json = $rawPost ?: file_get_contents('php://input');
         break;
     case 'application/x-www-form-urlencoded':
+        if (!isset($_POST['payload']) || !is_string($_POST['payload'])) {
+            throw new \Exception("Missing 'payload' field.");
+        }
         $json = $_POST['payload'];
         break;
     default:
@@ -68,12 +74,8 @@ switch (strtolower($_SERVER['HTTP_X_GITHUB_EVENT'])) {
 	    break;
     default:
         header('HTTP/1.0 404 Not Found');
-        echo "Event:$_SERVER[HTTP_X_GITHUB_EVENT] Payload:\n";
-        print_r($payload); # For debug only. Can be found in GitHub hook log.
+        header('Content-Type: text/plain; charset=utf-8');
+        echo 'Unsupported event';
         die();
 }
-$myfile = fopen("response.json", "w") or die("Unable to open file!");
-fwrite($myfile, $json);
-fclose($myfile);
-
 ?>

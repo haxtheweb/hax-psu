@@ -23,7 +23,7 @@
       "type": "skill-md",
       "description": "Operate HAX sites from Claude Code using the ClaudeHAX plugin, HAX CLI, and HAX web components. Use when the user wants to add pages, create courses, update content, add assessments, add quizzes, add videos, use HAX web components, analyze existing HAX sites, or suggest improvements using the ClaudeHAX /hax slash command or HAX CLI directly.",
       "url": "hax-claudehax/SKILL.md",
-      "digest": "sha256:4c3ce27c707efab7873e122ff581ebe78fd29e737ba50cc7c0442591665b7eee"
+      "digest": "sha256:36c5a9fc3305938e4e85867004c9ddabda6e8cd59553cf1e3c74f2c6c9058a04"
     },
     {
       "name": "hax-content-authoring",
@@ -48,11 +48,11 @@
       "files": [
         {
           "path": "references/ddd-tokens.md",
-          "digest": "sha256:e1d0dc567668a2b9a7322137c3d662c03612eed3a9dd0afb130859594fb9da46"
+          "digest": "sha256:5ec2513300d0612a23948beadbb689ee4207675a42aac6cec09a2599ae1363ea"
         },
         {
           "path": "references/simplecolors-migration.md",
-          "digest": "sha256:0598f0f9e7f2dc7b0a598a260f3a06cc028e8f9bbdabf3cd4c7db0180e54b477"
+          "digest": "sha256:c2136ce34778216f822a74fce9adda8af431704811bcac77e70595448cbf46a0"
         }
       ]
     },
@@ -68,14 +68,14 @@
       "type": "skill-md",
       "description": "Build and maintain HAXcms sites with proper structure, themes, and JSON Outline Schema. Use when creating a new HAXsite, editing site.json, managing page content, or modifying themes in the HAXcms ecosystem. Use when the user says \"create a site\", \"add pages\", \"edit site.json\", or references HAXcms site structure.",
       "url": "hax-site-building/SKILL.md",
-      "digest": "sha256:a9831cfaf34ae36259f8607bc4c4db6767e1aa9552a8079314a60c316e3567ce"
+      "digest": "sha256:1ab253f982c9e8a98188e6213b5b3ca790c2f760f871627511871612c9190171"
     },
     {
       "name": "hax-site-structure",
       "type": "skill-md",
       "description": "Read and navigate an existing HAXcms site from its portable files. Use when an agent lands on a HAXsite or HAXcms deployment and needs to understand site.json (JSON Outline Schema), resolve page content in pages/, find assets in files/, locate the theme, compute basePath, or discover the web component registry (wc-registry.json) and the magic-script autoloader. Load this FIRST when working with any HAX site so the rest of the ecosystem makes sense.",
       "url": "hax-site-structure/SKILL.md",
-      "digest": "sha256:97165add1f1cf49a2754864d808e50a33953d85ad15c443fe2f7fd49a8297130"
+      "digest": "sha256:88ddc1e37de23261bc5e77dead53a7c45055b2422569ca09f9d2e9349cea430d"
     },
     {
       "name": "hax-ubd-backward-design",
@@ -169,7 +169,13 @@
       "type": "skill-md",
       "description": "Develop HAX-capable web components using LitElement, DDD design system, and HAXSchema. Use when scaffolding new components, adding HAX editor support, auditing accessibility, or applying DDD tokens to elements in the webcomponents monorepo.",
       "url": "hax-webcomponent-dev/SKILL.md",
-      "digest": "sha256:9d807cf354b9f88968198b8d0a25cf2cab8c8728b087e8c6c540d4e1fef723f0"
+      "digest": "sha256:7543bad09c3b0b2f077c146b704740132a905e08728b1a1031d7d7beb932752d",
+      "files": [
+        {
+          "path": "references/grid-parent-child.md",
+          "digest": "sha256:b90e66fa1c3fb48a962f559105420a516baea4d77dae31f3e6e8c0ccaa68aaf0"
+        }
+      ]
     },
     {
       "name": "oerschema-audit",
