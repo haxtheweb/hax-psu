@@ -21,23 +21,26 @@ set_exception_handler(function($e) {
     die();
 });
 
-$rawPost = NULL;
-
-if ($hookSecret !== NULL) {
-    if (!isset($_SERVER['HTTP_X_HUB_SIGNATURE'])) {
-        throw new \Exception("HTTP header 'X-Hub-Signature' is missing.");
-    } elseif (!extension_loaded('hash')) {
-        throw new \Exception("Missing 'hash' extension to check the secret code validity.");
-    }
-    list($algo, $hash) = explode('=', $_SERVER['HTTP_X_HUB_SIGNATURE'], 2) + array('', '');
-    if (!in_array($algo, hash_algos(), TRUE)) {
-        throw new \Exception("Hash algorithm '$algo' is not supported.");
-    }
-    $rawPost = file_get_contents('php://input');
-    if (!hash_equals($hash, hash_hmac($algo, $rawPost, $hookSecret))) {
-        throw new \Exception('Hook secret does not match.');
-    }
-};
+// Fail closed: without a configured secret we cannot authenticate the sender.
+if ($hookSecret === false || $hookSecret === '') {
+    header('HTTP/1.1 500 Internal Server Error');
+    header('Content-Type: text/plain; charset=utf-8');
+    echo 'Webhook secret is not configured.';
+    exit;
+}
+if (!isset($_SERVER['HTTP_X_HUB_SIGNATURE_256'])) {
+    throw new \Exception("HTTP header 'X-Hub-Signature-256' is missing.");
+} elseif (!extension_loaded('hash')) {
+    throw new \Exception("Missing 'hash' extension to check the secret code validity.");
+}
+list($algo, $hash) = explode('=', $_SERVER['HTTP_X_HUB_SIGNATURE_256'], 2) + array('', '');
+if ($algo !== 'sha256') {
+    throw new \Exception('Only sha256 signatures are accepted.');
+}
+$rawPost = file_get_contents('php://input');
+if (!hash_equals(hash_hmac('sha256', $rawPost, $hookSecret), $hash)) {
+    throw new \Exception('Hook secret does not match.');
+}
 
 if (!isset($_SERVER['CONTENT_TYPE'])) {
     throw new \Exception("Missing HTTP 'Content-Type' header.");
@@ -72,8 +75,4 @@ switch (strtolower($_SERVER['HTTP_X_GITHUB_EVENT'])) {
         print_r($payload); # For debug only. Can be found in GitHub hook log.
         die();
 }
-$myfile = fopen("response.json", "w") or die("Unable to open file!");
-fwrite($myfile, $json);
-fclose($myfile);
-
 ?>
