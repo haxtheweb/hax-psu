@@ -780,8 +780,13 @@ export class HaxPsu extends DDD {
       () => {
         setTimeout(() => {
           if (this.shadowRoot && globalThis.location.hash) {
-            const nextTarget = this.shadowRoot.querySelector(`${globalThis.location.hash}`);
-            this.focusSection(nextTarget);
+            // the hash is user-controlled; an invalid selector throws
+            try {
+              const nextTarget = this.shadowRoot.querySelector(`${globalThis.location.hash}`);
+              this.focusSection(nextTarget);
+            } catch (e) {
+              // ignore hashes that are not valid CSS selectors
+            }
           }
         }, 0);
       },
