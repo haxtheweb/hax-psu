@@ -5,30 +5,23 @@
 Key facts:
 
 - Cost: free for Penn State users; HAX itself is open source (Apache-2.0) and free for anyone to self-host.
-- Who can use hax.psu.edu: anyone with a Penn State account, via https://hax.psu.edu/login.php. Anyone else can try the editor at https://hax.cloud or self-host HAX.
+- Who can use hax.psu.edu: anyone with a Penn State account, via https://hax.psu.edu/login.php. Anyone else can get HAX from https://haxtheweb.org and self-host it.
 - Typical uses: course materials and open educational resources (OER), student portfolios and resumes, project and department sites.
 - Accessibility: published pages must meet Penn State Policy AD69 (Accessibility Standards); HAX is built with accessibility-forward authoring.
 - Portability: sites are plain files (HTML + JSON) that can be downloaded and hosted elsewhere, including GitHub Pages and other static hosts.
-- Supported by: College of Arts and Architecture, College of Information Sciences and Technology, College of Education, Eberly College of Science and University Libraries, with outside contributors including Buttercups LLC.
+- Supported by: College of Arts and Architecture (where HAX began, home of HAX Lab), College of Information Sciences and Technology, College of Health and Human Development, Eberly College of Science and University Libraries, with outside contributors including Buttercups LLC. HAX is part of the Apereo Foundation.
+- Institutional goals: HAX meets objectives in all five goals of the College of Arts and Architecture Strategic Plan 2030, supports Penn State's strategic plan, and 7 of the 17 UN Sustainable Development Goals; evidence for each is at https://hax.cloud/penn-state and https://hax.cloud/un-sdgs.
+- The HAX network: haxtheweb.org (why HAX), hax.cloud (PRAW, the stories behind HAX), learn.hax.cloud (tutorials), webcomponents.hax.cloud (every element) and art.hax.cloud (the HAX art movement).
 - Contact: Bill Rose, Product Owner (bmr1@psu.edu), or hax@psu.edu. Community support on Discord.
 - Name: HAX stands for Headless Authoring eXperience. Also referred to as HAXcms, HAXTheWeb or "HAX @ PSU".
 
 ## Get started
 
-<<<<<<< HEAD
 - [Log in to HAX at Penn State](https://hax.psu.edu/login.php): Penn State WebAccess sign-in; creates or opens your HAX sites.
-- [Try HAX without an account](https://hax.cloud): Public demo of the HAX editor.
+- [HAXTheWeb](https://haxtheweb.org/): Why HAX, and every way to get it outside Penn State.
+- [Learn HAX](https://learn.hax.cloud/): Tutorials that teach HAX one flow at a time.
 - [HAX CLI](https://www.npmjs.com/package/@haxtheweb/create): `npm install --global @haxtheweb/create` then `hax start` to build HAX sites locally.
-- [Create your first site in 20 seconds (video)](https://www.youtube.com/watch?v=fZK3UiOcvag)
-=======
-- [Log in / Start](https://hax.psu.edu/login.php): Penn State WebAccess single sign-on entry to the HAXcms authoring service.
-- [Try HAX (demo)](https://hax.cloud): No-login demo of the HAX editor on HAX.cloud.
-- [Learn HAX](https://haxtheweb.org): Official HAX documentation site (a HAXcms site) — philosophy, pillars, tutorials, component reference.
-- [HAX Documentation](https://haxtheweb.org/ddd): DDD design system reference.
-- [HAX CLI](https://www.npmjs.com/package/@haxtheweb/create): `npm install @haxtheweb/create --global` then `hax help`.
-- [Unified issue queue](https://github.com/haxtheweb/issues): All HAX ecosystem bugs, features, and discussion.
-- [Community Discord](https://discord.gg/aCGxmRHEJP): Chat with the HAX community.
->>>>>>> c0f7364 (build up)
+- [HAX Lab](https://hax.cloud/hax-lab): Students and contributors build HAX itself; open office hours online Monday, Wednesday and Friday, noon to 4 p.m. Eastern, joined through the Discord.
 
 ## Documentation
 
@@ -42,18 +35,17 @@ Key facts:
 ## Examples built with HAX at Penn State
 
 <!-- sync:examples:start -->
-- [Customer Discovery 101](https://customerdiscovery101.launchbox.psu.edu/): Invent Penn State, Launchbox
+- [Learn to Flourish Hub](https://flourish.hhd.psu.edu/): Health and Human Development, Learn to Flourish
+- [Customer Discovery 101](https://customerdiscovery101.launchbox.psu.edu/): Invent Penn State LaunchBox, Launchbox
 - [Eberly OER Courses](https://oer.courses.science.psu.edu/): Eberly College of Science, Office of Digital Learning
-- [AA 100](https://courses.hax.psu.edu/bto108/sites/aa100-su23/): College of Arts and Architecture, Introduction to International Arts course
 - [The Sea Voyage](https://tsv-dbfp.libraries.psu.edu): University Libraries, Digital Beaumont & Fletcher
-- [PHYS 211](https://oer.hax.psu.edu/lul29/sites/phys211/): Eberly College of Science, Mechanics course
-- [HAX Docs](https://haxtheweb.org/): HAXcellence, Teaching with HAX
-- [IST 256](https://oer.hax.psu.edu/bto108/sites/ist256/): Information Sciences & Technology, Programming for the web Course
+- [AA 100](https://courses.hax.psu.edu/bto108/sites/aa100-su23/): College of Arts and Architecture, Introduction to International Arts course
+- [IST 256](https://oer.hax.psu.edu/bto108/sites/ist256/): Information Sciences and Technology, Programming for the web Course
 <!-- sync:examples:end -->
 
 ## Support and community
 
-- [HAX community Discord](https://discord.gg/EKYJAjqGhf): Help from the community and the HAX team.
+- [HAX community Discord](https://discord.gg/aCGxmRHEJP): Help from the community and the HAX team.
 - [Issue queue](https://github.com/haxtheweb/issues): Bugs, feature requests and discussion for the whole HAX ecosystem.
 - [Source code](https://github.com/haxtheweb): All HAX repositories.
 - [Security policy](https://hax.psu.edu/.well-known/security.txt): RFC 9116 security contact.

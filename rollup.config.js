@@ -52,8 +52,20 @@ export default {
           flatten: false
         },
         {
-          src: ['node_modules/@haxtheweb/simple-icon/lib/svgs/*', '!elements/simple-icon/lib/svgs/elmsln-custom'],
+          src: ['node_modules/@haxtheweb/simple-icon/lib/svgs/*', '!node_modules/@haxtheweb/simple-icon/lib/svgs/elmsln-custom'],
           dest: `${outputDir}/svgs`,
+          flatten: false
+        },
+        {
+          // DDD serves its fonts itself (no Google): the families this page
+          // uses, beside the bundle where d-d-d/lib/fonts.js looks for them
+          src: [
+            'roboto',
+            'roboto-slab',
+            'roboto-condensed',
+            'press-start-2p',
+          ].map((f) => `node_modules/@haxtheweb/d-d-d/lib/fonts/${f}`),
+          dest: `${outputDir}/fonts`,
           flatten: false
         },
         {
@@ -68,7 +80,9 @@ export default {
     /** Minify JS */
     terser(),
     /** Bundle assets references via import.meta.url */
-    importMetaAssets(),
+    // a HAX element can point at a folder (its i18n `locales/`); leave those
+    // references as they are instead of failing the build
+    importMetaAssets({ warnOnError: true }),
     /** Compile JS to a lower language target */
     babel({
       babelHelpers: 'bundled',

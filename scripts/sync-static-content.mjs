@@ -72,7 +72,7 @@ async function extractTree() {
     await page.goto(`${origin}/index.html`);
     await page.waitForFunction(() => {
       const el = document.querySelector('hax-psu');
-      return el && el.shadowRoot && el.shadowRoot.querySelector('#section-9 details');
+      return el && el.shadowRoot && el.shadowRoot.querySelector('#faq details');
     }, null, { timeout: 60000 });
     return await page.evaluate(extractInPage);
   } finally {
@@ -89,8 +89,19 @@ function extractInPage() {
   const root = document.querySelector('hax-psu').shadowRoot;
   const SKIP = new Set([
     'HR', 'IMG', 'SIMPLE-IMG', 'RPG-CHARACTER', 'COUNT-UP', 'SCROLL-BUTTON',
-    'SCRIPT', 'STYLE', 'TEMPLATE',
+    'SCRIPT', 'STYLE', 'TEMPLATE', 'SVG', 'SIMPLE-ICON-LITE', 'UN-SDG',
+    // the playful pieces: characters, not content
+    'PSU-PEEK', 'PSU-GAME-DAY', 'PSU-TRAVELER',
   ]);
+  // elements whose words live in their own shadow DOM
+  const SHADOW = new Set(['PSU-VOICES']);
+  const skip = (n) =>
+    SKIP.has(n.tagName) || n.getAttribute('aria-hidden') === 'true';
+  // a hax-story-link draws one link in its shadow DOM
+  const storyLink = (n) => {
+    const a = n.shadowRoot && n.shadowRoot.querySelector('a');
+    return a ? { t: 'a', href: a.getAttribute('href'), c: [{ t: 'text', v: a.textContent }] } : null;
+  };
 
   function inline(node) {
     const out = [];
@@ -99,8 +110,13 @@ function extractInPage() {
         out.push({ t: 'text', v: n.textContent });
         return;
       }
-      if (n.nodeType !== Node.ELEMENT_NODE || SKIP.has(n.tagName)) return;
+      if (n.nodeType !== Node.ELEMENT_NODE || skip(n)) return;
       switch (n.tagName) {
+        case 'HAX-STORY-LINK': {
+          const link = storyLink(n);
+          if (link) out.push(link);
+          break;
+        }
         case 'STRONG':
         case 'B':
           out.push({ t: 'strong', c: inline(n) });
@@ -135,14 +151,30 @@ function extractInPage() {
         if (n.textContent.trim()) out.push({ t: 'p', c: [{ t: 'text', v: n.textContent }] });
         return;
       }
-      if (n.nodeType !== Node.ELEMENT_NODE || SKIP.has(n.tagName)) return;
+      if (n.nodeType !== Node.ELEMENT_NODE || skip(n)) return;
       const tag = n.tagName;
       const h = /^H([1-6])$/.exec(tag);
       if (h) {
         ctx.level = parseInt(h[1], 10);
         out.push({ t: 'h', level: ctx.level, c: inline(n) });
-      } else if (tag === 'P') {
+      } else if (tag === 'A') {
+        out.push({ t: 'p', c: inline({ childNodes: [n] }) });
+      } else if (tag === 'P' || tag === 'BLOCKQUOTE') {
         out.push({ t: 'p', c: inline(n) });
+      } else if (tag === 'HAX-STORY-LINK') {
+        const link = storyLink(n);
+        if (link) out.push({ t: 'p', c: [link] });
+      } else if (tag === 'HAX-CAST-MEMBER') {
+        const level = Math.min(ctx.level + 1, 6);
+        out.push({ t: 'h', level, c: [{ t: 'text', v: n.getAttribute('name') || '' }] });
+        out.push(...blocks(n, { level }));
+        if (n.getAttribute('link')) {
+          out.push({ t: 'p', c: [{ t: 'a', href: n.getAttribute('link'), c: [{ t: 'text', v: n.getAttribute('label') || n.getAttribute('link') }] }] });
+        }
+      } else if (SHADOW.has(tag) && n.shadowRoot) {
+        out.push(...blocks(n.shadowRoot, ctx));
+      } else if (tag === 'UL' && n.classList.contains('examples')) {
+        out.push({ t: 'examples' });
       } else if (tag === 'UL' || tag === 'OL') {
         out.push({ t: 'ul', items: [...n.children].map((li) => inline(li)) });
       } else if (tag === 'PRE') {
@@ -151,13 +183,9 @@ function extractInPage() {
         const summary = n.querySelector('summary');
         const level = Math.min(ctx.level + 1, 6);
         out.push({ t: 'h', level, c: summary ? inline(summary) : [] });
-        const body = document.createElement('div');
-        [...n.childNodes].forEach((c) => {
-          if (c !== summary) body.appendChild(c.cloneNode(true));
-        });
+        // walk the originals: a copy would lose the story links' shadow DOM
+        const body = { childNodes: [...n.childNodes].filter((c) => c !== summary) };
         out.push(...blocks(body, { level }));
-      } else if (tag === 'PLAY-LIST' && n.id === 'examplestemplate') {
-        out.push({ t: 'examples' });
       } else if (tag === 'VIDEO-PLAYER') {
         out.push({
           t: 'p',
@@ -185,8 +213,11 @@ function extractInPage() {
     let s = '';
     node.childNodes.forEach((n) => {
       if (n.nodeType === Node.TEXT_NODE) s += n.textContent;
-      else if (n.nodeType !== Node.ELEMENT_NODE || SKIP.has(n.tagName)) return;
-      else if (n.tagName === 'A') {
+      else if (n.nodeType !== Node.ELEMENT_NODE || skip(n)) return;
+      else if (n.tagName === 'HAX-STORY-LINK') {
+        const link = storyLink(n);
+        if (link) s += ` ${link.c[0].v.trim()} (${link.href}) `;
+      } else if (n.tagName === 'A') {
         const href = n.getAttribute('href') || '';
         const text = plain(n).trim();
         const target = href.startsWith('mailto:')
@@ -199,17 +230,16 @@ function extractInPage() {
     return s;
   }
 
-  const hero = root.querySelector('#section-1');
-  const heroLinks = [...hero.querySelectorAll('simple-cta')].map((cta) => ({
-    href: cta.getAttribute('link'),
-    text: cta.textContent.trim(),
+  const hero = root.querySelector('#top');
+  const heroLinks = [...hero.querySelectorAll('a')].map((a) => ({
+    href: a.getAttribute('href'),
+    text: a.textContent.replace(/\s+/g, ' ').trim(),
   }));
 
   const sections = [];
-  root.querySelectorAll('main > page-section').forEach((sec) => {
-    // hero is mirrored by the hand-written loading state; usage stats are
-    // live numbers from an API, not static content
-    if (sec.id === 'section-1' || sec.id === 'section-3') return;
+  // the hero (#top) is mirrored by the hand-written loading state, and the
+  // usage stats are live numbers from an API, so neither is a section here
+  root.querySelectorAll('main > section').forEach((sec) => {
     const c = blocks(sec, { level: 1 });
     if (c.length) sections.push({ id: sec.id, c });
   });
@@ -218,13 +248,10 @@ function extractInPage() {
     .filter((a) => a.textContent.trim())
     .map((a) => ({ href: a.getAttribute('href'), text: a.textContent.replace(/\s+/g, ' ').trim() }));
 
-  const faq = [...root.querySelectorAll('#section-9 details')].map((d) => {
+  const faq = [...root.querySelectorAll('#faq details')].map((d) => {
     const summary = d.querySelector('summary');
-    const body = document.createElement('div');
-    [...d.childNodes].forEach((c) => {
-      if (c !== summary) body.appendChild(c.cloneNode(true));
-    });
-    return { q: summary.textContent, a: plain(body) };
+    const body = { childNodes: [...d.childNodes].filter((c) => c !== summary) };
+    return { q: summary.textContent, a: plain(body).replace(/\s+/g, ' ').trim() };
   });
 
   return { heroLinks, sections, footer, faq };
