@@ -8,116 +8,349 @@ This is the full text of the hax.psu.edu homepage as Markdown, for AI assistants
 
 ## Quick links
 
-- [Login](https://hax.psu.edu/login.php)
-- [Open Source](https://github.com/haxtheweb)
-- [Docs](https://haxtheweb.org/)
+- [Log in with Penn State](https://hax.psu.edu/login.php)
+- [Students: join HAX Lab](https://hax.psu.edu/#lab)
 
-## What is HAX?
+The HAX network
 
-**A standards-based publishing platform for *web authoring* and *content ownership*.**
+## One door into everything HAX
 
-HAX is Penn State's open-source web authoring platform for accessible, standards-based publishing. It helps teams publish faster without sacrificing quality through portable content and long-term ownership not tied to a single vendor.
+hax.psu.edu is where Penn State builds. The rest of the HAX network is open to everyone: why HAX, the brain behind it, tutorials, every block, and the art that started it all.
 
-HAX supports teaching, research, outreach, and student development with a shared platform that scales from one course site to institution-wide initiatives.
+- [**HAX at Penn State** hax.psu.edu · you are here Log in with your Penn State account and build. Hosted, supported and governed by Penn State.](https://hax.psu.edu/#top)
+- [**HAXTheWeb** haxtheweb.org Why HAX is for you, and every way to get it.](https://haxtheweb.org/)
+- [**PRAW** hax.cloud The brain of the HAX ecosystem: every person, pillar and project, and how they connect.](https://hax.cloud/)
+- [**Learn** learn.hax.cloud Tutorials that teach HAX one flow at a time.](https://learn.hax.cloud/)
+- [**Web components** webcomponents.hax.cloud Every HAX element, with live demos and walkthroughs.](https://webcomponents.hax.cloud/)
+- [**Art** art.hax.cloud The HAX art movement: posters, the Future Traveler across time, and playful tools like RPG me.](https://art.hax.cloud/)
 
-### Part of Penn State?
+HAX Lab
 
-[Log in to get started](https://hax.psu.edu/login.php)
+## Don't just use it. Build it.
 
-#### Prefer command line?
+HAX Lab is where students and contributors build HAX itself, through courses, independent studies, internships and clubs. What you make ships to hundreds of real sites, with your name on it.
 
-```
-npm install --global @haxtheweb/create
-hax start
-```
+### Drop in to open office hours
 
-## Built for every role at Penn State
+Online every Monday, Wednesday and Friday, noon to 4 p.m. Eastern. Many contributors start here without ever taking a class.
 
-**Faculty** - Create and update accessible course materials quickly. Reuse content across semesters, keep ownership of your work, and focus on teaching instead of platform complexity.
+[Join the Discord](https://discord.gg/aCGxmRHEJP)
 
-**Focus on teaching**, *not complexity!*
+### Independent study or internship
 
-**Students** - Build portfolios, resumes, and project sites you can take with you beyond graduation. HAX is portable and lightweight, and it gives students meaningful ways to learn by doing while contributing to a vibrant campus publishing community.
+Build a real feature that ships to hundreds of sites. Alumni now work at Red Hat, Adobe, IBM, Ford and PennDOT.
 
-**Staff** - Build a department website, a project website, or a personal website for a short-term initiative, anything you need. Set up a quick site to talk about a project, download the site and host it on another server. Host content from github or anywhere else. HAX is there to help you get your job done faster with less training.
+[Meet HAX Lab](https://hax.cloud/hax-lab)
 
-## Institutional impact
+### Bring your club
 
-HAX combines academic flexibility with operational discipline. It is supported through cross-college collaboration and designed for long-term maintainability.
+Security, UX, design: student clubs bring their own passion and HAX gives them a real problem to work on.
 
-- Open-source and portable architecture that reduces vendor lock-in risk
-- Accessibility-forward publishing practices
-- Shared governance across participating units
-- Demonstrated adoption across courses, programs, and public-facing sites
+[See what clubs did](https://hax.cloud/stories/1eb915c8)
 
-[Discuss adoption for your unit](mailto:bmr1@psu.edu)
+### Faculty: fund a student project
 
-## Examples
+Faculty fund students to solve their own teaching problems, and HAX gains a capability everyone can use.
 
-Here are some examples of real courses and websites using HAX in production.
+[See faculty grants](https://hax.cloud/stories/59022035)
 
-- [Customer Discovery 101](https://customerdiscovery101.launchbox.psu.edu/) (Invent Penn State): Launchbox
+Mon · Wed · Fri
+
+Noon to 4 p.m. ET
+
+**Open office hours, online.** Drop in with a question, an idea or a bug and leave with something shipped.
+
+Want to come in person? Ask in the Discord.
+
+[Join the HAX Discord](https://discord.gg/aCGxmRHEJP)
+
+Student success
+
+## Students who shipped it
+
+Each character below is drawn from the student's own name, the same way HAX draws you when you log in.
+
+### Jimmy Kane
+
+Led the four-student team that built the first Site Dashboard in one semester, the work HAX's 8-bit characters come from. Now an iOS engineer at Ford Motor Credit.
+
+[See the story](https://hax.cloud/stories/ee450a19)
+
+### Zach Dodson
+
+Built a HAX and AI proof of concept, then sent a pull request adding a design system audit to the HAX CLI. It was part of the class within weeks.
+
+[See the story](https://hax.cloud/stories/a3d9550d)
+
+### Winston White
+
+Took IST 256 in 2024, then built themes, much of the HAX CLI and skeleton templating, and TA'd the class. Now in site reliability at IBM.
+
+[See the story](https://hax.cloud/stories/325e6281)
+
+Watch: [HAX Lab student story](https://www.youtube.com/watch?v=Db3PnqPAFjw)
+
+Watch: [HAX Lab student story, part two](https://www.youtube.com/watch?v=q8mbsiiwMCE)
+
+### What they did, and what you can do
+
+Jimmy, Zach and Winston started where you are: a class, an office hours visit, a question. Each one shipped something real that people use every day, and took that experience into their careers.
+
+**Your turn.** Bring an idea, a bug or just curiosity to open office hours, and leave with something shipped.
+
+[Join the HAX Discord](https://discord.gg/aCGxmRHEJP)
+
+[See the story: From HAX Lab to industry on hax.cloud](https://hax.cloud/stories/1cc711b1)
+
+- [More student stories on haxtheweb.org](https://haxtheweb.org/community)
+- [How HAX Lab keeps HAX going: the SIIP pipeline](https://haxtheweb.org/community)
+
+In their own words
+
+## Voices
+
+Students, faculty and the units that run on HAX. Hover or focus a card to meet their character.
+
+- "HAX was one of the single most impactful things for my career." **Winston White** HAX Lab alumnus, now at IBM [Story: Winston White, on hax.cloud](https://hax.cloud/stories/325e6281)
+- "I don't have to sit there and convince anybody that this is an important project. They get it right away." **Dr. Jennifer Frank** HAX Lab faculty partner, International Student Portfolio [Story: Dr. Jennifer Frank, on hax.cloud](https://hax.cloud/stories/59022035)
+- "Now launched, our program has received overwhelmingly positive reviews from our users for both functionality and design." **Annie Hughes** Invent Penn State LaunchBox, Customer Discovery 101 [See Customer Discovery 101](https://customerdiscovery101.launchbox.psu.edu/)
+- "You should not need to know what the web is to do everything with it." **Bryan Ollendyke** HAX platform owner [Story: Bryan Ollendyke, on hax.cloud](https://hax.cloud/history)
+
+Built across Penn State
+
+## The colleges and units behind HAX
+
+HAX is a collaboration across Penn State, steered by a Core Product Development team that meets monthly.
+
+### [College of Arts and Architecture](https://arts.psu.edu/)
+
+Where HAX began, home of HAX Lab and the Office of Digital Learning.
+
+[Story: College of Arts and Architecture, on hax.cloud](https://hax.cloud/stories/888e2051)
+
+### [College of Information Sciences and Technology](https://ist.psu.edu/)
+
+IST 256, plus the CCSO and UXDC student clubs.
+
+[Story: College of Information Sciences and Technology, on hax.cloud](https://hax.cloud/stories/2e9dbaf4)
+
+### [College of Health and Human Development](https://hhd.psu.edu/)
+
+Home of the Learn to Flourish Hub.
+
+[Story: College of Health and Human Development, on hax.cloud](https://hax.cloud/stories/2900ac93)
+
+### [Eberly College of Science](https://science.psu.edu/)
+
+14 courses and more than 1,800 pages, from BIOL 110 to PHYS 212.
+
+[Story: Eberly College of Science, on hax.cloud](https://hax.cloud/stories/d250eba0)
+
+### [University Libraries](https://libraries.psu.edu/)
+
+Publishes the Digital Beaumont and Fletcher plays.
+
+[Story: University Libraries, on hax.cloud](https://hax.cloud/stories/a2318746)
+
+### [Office of Digital Learning](https://odl.aanda.psu.edu/)
+
+Arts and Architecture's digital learning team.
+
+### [Innovation Hub](https://innovationhub.psu.edu/)
+
+Penn State's downtown coworking space; its earlier site ran on hax.psu.edu.
+
+[Story: Innovation Hub, on hax.cloud](https://hax.cloud/stories/26ddb6ca)
+
+### [Apereo Foundation](https://www.apereo.org/)
+
+The open source foundation HAX belongs to.
+
+[Story: Apereo Foundation, on hax.cloud](https://hax.cloud/stories/9931c355)
+
+[See the story: HAX at Penn State on hax.cloud](https://hax.cloud/penn-state)
+
+[Bring HAX to your unit: Bill Rose, Product Owner (bmr1@psu.edu)](mailto:bmr1@psu.edu)
+
+Examples
+
+## Made with HAX at Penn State
+
+- [Learn to Flourish Hub](https://flourish.hhd.psu.edu/) (Health and Human Development): Learn to Flourish
+- [Customer Discovery 101](https://customerdiscovery101.launchbox.psu.edu/) (Invent Penn State LaunchBox): Launchbox
 - [Eberly OER Courses](https://oer.courses.science.psu.edu/) (Eberly College of Science): Office of Digital Learning
-- [AA 100](https://courses.hax.psu.edu/bto108/sites/aa100-su23/) (College of Arts and Architecture): Introduction to International Arts course
 - [The Sea Voyage](https://tsv-dbfp.libraries.psu.edu/) (University Libraries): Digital Beaumont & Fletcher
-- [PHYS 211](https://oer.hax.psu.edu/lul29/sites/phys211/) (Eberly College of Science): Mechanics course
-- [HAX Docs](https://haxtheweb.org/) (HAXcellence): Teaching with HAX
-- [IST 256](https://oer.hax.psu.edu/bto108/sites/ist256/) (Information Sciences & Technology): Programming for the web Course
+- [AA 100](https://courses.hax.psu.edu/bto108/sites/aa100-su23/) (College of Arts and Architecture): Introduction to International Arts course
+- [IST 256](https://oer.hax.psu.edu/bto108/sites/ist256/) (Information Sciences and Technology): Programming for the web Course
 
-## Got 20 seconds?
+[See the story: Every hax.psu.edu course, by college on hax.cloud](https://hax.cloud/hax-psu-edu)
 
-Watch: [Creating your first HAX site in 20 seconds](https://www.youtube.com/watch?v=fZK3UiOcvag)
+[Read more: The showcase on haxtheweb.org on haxtheweb.org](https://haxtheweb.org/showcase)
 
-## About
+Institutional goals
 
-HAX is a service provided through a collaboration between [Penn State College of Arts and Architecture](https://arts.psu.edu/), [College of Information Sciences and Technology](https://ist.psu.edu/), [College of Education](https://ed.psu.edu/), [**Eberly College of Science**](https://science.psu.edu/), and [**University Libraries**](https://libraries.psu.edu/). The platform is powered by *HAXcms*, originally developed to power 100s of high scale online courses.
+## From the college, to the Commonwealth, to the planet
 
-### Interested in collaboration?
+HAX starts with the goals of the College of Arts and Architecture. Meeting them builds skills, partnerships and open tools that reach far past campus, into every corner of Pennsylvania. And because we build the technology the right way, the same work helps build a better planet. Every claim links to its evidence on hax.cloud.
 
-Contact [Bill Rose, Product Owner](mailto:bmr1@psu.edu).
+- [The college](https://hax.psu.edu/#goals-college)
+- [The Commonwealth](https://hax.psu.edu/#goals-psu)
+- [The planet](https://hax.psu.edu/#goals-planet)
 
-## Privacy policy
+### College of Arts and Architecture Strategic Plan 2030
 
-Penn State IT does not monitor websites and does not assume responsibility for any published content. The content authors are responsible for the content of their websites. Use of this service is governed by [Penn State policies and guidelines](https://security.psu.edu/awareness/psu-policies/), including [Penn State IT Web Services Policy](https://policy.psu.edu/policies/ad54). All pages must be compliant with [Accessibility Standards, Policy AD69](https://policies.psu.edu/policies/ad69).
+HAX meets 14 of the plan's objectives, across all five of its goals.
 
-## Dig in to learn more about HAX
+#### Build a culture of collaboration
 
-Need more tutorials? Dig into the [full documentation and user blocks section](https://haxtheweb.org/welcome) to learn more about how HAX can help you!
+- Shared spaces and systems that encourage collaboration (1A)
+- Cross-disciplinary collaboration in curricula, research and practice (1B)
+- Collaboration that reduces administrative burden (1C)
 
-- [Migrating content to HAX](https://haxtheweb.org/tutorials/migrate-data-to-hax)
-- [Block tutorials](https://haxtheweb.org/tutorials/block-usage)
-- [The Gallery of Online Excellence](https://haxtheweb.org/the-gallery-of-online-excellence)
+[Story: Build a culture of collaboration, on hax.cloud](https://hax.cloud/stories/d83bb4ec)
 
-## Frequently Asked Questions
+#### Amplify our responsibility as a cultural bridge
 
-### Who can use HAX?
+- Student experiential opportunities (2B)
+- Human-centered design in courses and creative practice (2C)
+- A&A's visibility and partnerships, state to global (2D)
 
-Anyone, anywhere! Thanks to HAX being open source, all you need is a web server and a domain name to get started. We also support publishing directly to GitHub pages and other static publishing tools for advanced developer use-cases. If you are part of Penn State though you can just click [log in](https://hax.psu.edu/login.php) to get started immediately!
+[Story: Amplify our responsibility as a cultural bridge, on hax.cloud](https://hax.cloud/stories/342ec276)
 
-### Who supports HAX?
+#### Empower learners to build the future
 
-The HAX user community is supported internal to Penn State by a collaboration between several units including the College of Arts and Architecture, College of Information Sciences and Technology, College of Education, Eberly College of Science, and University Libraries. HAX also receives contributions from groups outside of Penn State including Buttercups LLC and community members at large.
+- Diverse career pathways through experiential learning (3A)
+- Ethical AI literacy and future-ready skills (3B)
+- Creativity and emerging technology for all students (3C)
+- New learning models that match workforce needs (3D)
 
-### How do I join the community?
+[Story: Empower learners to build the future, on hax.cloud](https://hax.cloud/stories/71ac19ae)
 
-Join our community Discord channel to get support from the community and the HAX team. [Join the HAX Discord](https://discord.gg/aCGxmRHEJP)
+#### Champion arts and design as research and practice
 
-### Why was HAX created?
+- Cross-campus partnerships that raise arts and design's impact (4A)
+- Recognition of A&A's creative activity and scholarship (4B)
+- Human-centered use of AI in creative practice (4C)
 
-HAX is a response to a lack of products existing to meet the needs of producing accessible and engaging web content in online course environments. The university has a rich history of building a mix of custom, open source and buying repurposed commercial products with varying success.
+[Story: Champion arts and design as research and practice, on hax.cloud](https://hax.cloud/stories/cad05bce)
 
-HAX was born out of a university Request For Information (RFI) that sought to build a custom Drupal Instructional Content management System (iCMS). After requirements were gathered by stakeholders across the university, it was determined that the best path forward was to build a new kind of solution as the system requirements described were far beyond what any commercial product was offering, and no vendors responded to the Request for proposal after initial RFI process.
+#### Cultivate an equitable community for all
+
+- Remove affordability and access barriers (5B)
+
+[Story: Cultivate an equitable community for all, on hax.cloud](https://hax.cloud/stories/e6680a54)
+
+[See the story: Tour: how HAX meets A&A's plan on hax.cloud](https://hax.cloud/tours/a-and-a-strategic-plan-2030-how-hax-meets-a-and-a-s-plan)
+
+[Read the A&A Strategic Plan 2030](https://arts.psu.edu/about/aa-strategic-plan-2030)
+
+### Meeting the college's goals improves the Commonwealth
+
+What HAX does for the college carries into Penn State's strategic plan and its land-grant promise to Pennsylvania.
+
+#### Enhancing Student Success
+
+Mentoring and class experiences that carry students into careers, student clubs working on a real product, and the Learn to Flourish Hub's focus on wellness.
+
+[Story: Enhancing Student Success, on hax.cloud](https://hax.cloud/stories/c319d900)
+
+#### Increasing Land-Grant Impact
+
+Partnerships with industry, nonprofits and communities: open packages used around the world, HAX Camp, and the faculty and donors behind the Learn to Flourish Hub.
+
+[Story: Increasing Land-Grant Impact, on hax.cloud](https://hax.cloud/stories/bc2c7d84)
+
+#### Diversity, Equity, Inclusion and Belonging
+
+Closing outcome gaps by removing barriers: a $250 textbook became a $30 fee, and pages stay fast on any device.
+
+[Story: Diversity, Equity, Inclusion and Belonging, on hax.cloud](https://hax.cloud/stories/55149bcc)
+
+[See the story: How HAX meets Penn State's plan on hax.cloud](https://hax.cloud/penn-state/strategic-plan)
+
+[Read Penn State's strategic plan](https://strategicplan.psu.edu/)
+
+### Building technology the right way builds a better planet
+
+Accessible, open and efficient by design, HAX meets 7 of the 17 UN Sustainable Development Goals. We only list the goals we have evidence for.
+
+#### Quality Education (Goal 4)
+
+Accessible and open by default; students learn by building a real product.
+
+[Story: Quality Education, on hax.cloud](https://hax.cloud/stories/0b18f2ea)
+
+#### Affordable and Clean Energy (Goal 7)
+
+Less energy per page: web standards, offline-capable sites, services that run only when called.
+
+[Story: Affordable and Clean Energy, on hax.cloud](https://hax.cloud/stories/60ba266e)
+
+#### Decent Work and Economic Growth (Goal 8)
+
+Real-product experience that carries into industry.
+
+[Story: Decent Work and Economic Growth, on hax.cloud](https://hax.cloud/stories/a67c966c)
+
+#### Industry, Innovation and Infrastructure (Goal 9)
+
+Hundreds of open web components and packages others reuse.
+
+[Story: Industry, Innovation and Infrastructure, on hax.cloud](https://hax.cloud/stories/04fbf8b9)
+
+#### Reduced Inequalities (Goal 10)
+
+Works for everyone, on any device, whatever their ability.
+
+[Story: Reduced Inequalities, on hax.cloud](https://hax.cloud/stories/b66a6c30)
+
+#### Responsible Consumption and Production (Goal 12)
+
+Content outlives redesigns, so nothing gets rebuilt.
+
+[Story: Responsible Consumption and Production, on hax.cloud](https://hax.cloud/stories/808a5b5a)
+
+#### Partnerships for the Goals (Goal 17)
+
+Colleges, foundations, companies and students build it together.
+
+[Story: Partnerships for the Goals, on hax.cloud](https://hax.cloud/stories/e6c6907b)
+
+[See the story: The UN goals HAX meets on hax.cloud](https://hax.cloud/un-sdgs)
+
+FAQ
+
+## Questions
+
+### Who can use hax.psu.edu?
+
+Anyone with a Penn State account: [log in](https://hax.psu.edu/login.php) and start building. HAX itself is free and open source, so anyone outside Penn State can get it from [haxtheweb.org](https://haxtheweb.org/).
 
 ### How are decisions made?
 
-Decisions about the platform are influenced by a mix of needs from students, faculty and staff either taking courses delivered via the platform or actively building material with the platform. The direction of HAX is steered by the *Core Product Development team* which meets monthly and is made up of representatives from any group contributing development, design, or other skillsets toward the platform's development and sustainment. If you would like to join the *Core Product Development team* please contact [Bill Rose, Product Owner](mailto:bmr1@psu.edu).
+By the people who use it: students, faculty and staff who take or build courses with HAX. The Core Product Development team meets monthly and is open to any group contributing development, design or other skills. To join, contact [Bill Rose, Product Owner](mailto:bmr1@psu.edu) (bmr1@psu.edu).
 
-### What's with the 8-bit RPG characters?
+### Why was HAX created?
 
-Our 8-bit vibe was a design challenge presented to four College of IST students in the Spring of 2022. They were tasked with creating an over-world design that was fun, inviting, creative, and unique. The team took these requirements and built an experience that is playful, easy to use, and feels more like playing a video game than building a website. This inspired the creation of future iterations of the system which get more professional with each release, yet still retain the playful aspects at times to remind us of who we are building for.
+A university Request for Information sought a custom instructional content management system. The requirements went far beyond what any vendor offered and no vendor answered the request for proposal, so Penn State built a new kind of solution.
 
-Much like 8-bit video games were designed to be approachable and fun for all ages, HAX is designed to be approachable and fun for all skill levels! Each RPG style character is unique to the user logging in and helps provide a humanizing touch. Websites produced by HAX can be a mix of professional and playful but the 8-bit design helps you designate between the admin task and what end-users see.
+[See the story: Where HAX came from on hax.cloud](https://hax.cloud/history)
+
+### Privacy and policy
+
+Penn State IT does not monitor websites and does not assume responsibility for published content; authors are responsible for their own sites. Use of this service is governed by [Penn State policies and guidelines](https://security.psu.edu/awareness/psu-policies/), including the [IT Web Services Policy](https://policy.psu.edu/policies/ad54). All pages must comply with [Accessibility Standards, Policy AD69](https://policies.psu.edu/policies/ad69).
+
+## We are…
+
+…making the web bright, accessible, open, fast, portable, remixable and fun again.
+
+Help make the web fun with us.
+
+- Bill Rose, Product Owner [bmr1@psu.edu](mailto:bmr1@psu.edu)
+- The HAX team [hax@psu.edu](mailto:hax@psu.edu)
+- Chat with us [HAX Discord](https://discord.gg/aCGxmRHEJP)
+- Follow along [HAX on LinkedIn](https://www.linkedin.com/company/haxtheweb/)
 
 ## Footer
 
-[Privacy Statement](https://www.psu.edu/web-privacy-statement) · [Non Discrimination](https://policy.psu.edu/policies/ad85) · [Accessibility](https://www.psu.edu/accessibilitystatement) · [Equal Opportunity](https://policy.psu.edu/policies/hr11) · [Legal Statements](https://www.psu.edu/legal-statements) · [The Pennsylvania State University © 2026](https://www.psu.edu/copyright-information/index.html) · [Login](https://hax.psu.edu/login.php)
+[Privacy Statement](https://www.psu.edu/web-privacy-statement) · [Non Discrimination](https://policy.psu.edu/policies/ad85) · [Accessibility](https://www.psu.edu/accessibilitystatement) · [Equal Opportunity](https://policy.psu.edu/policies/hr11) · [Legal Statements](https://www.psu.edu/legal-statements) · [The Pennsylvania State University © 2026](https://www.psu.edu/copyright-information/index.html) · [Log in](https://hax.psu.edu/login.php) · [Part of the HAX network](https://haxtheweb.org/)
