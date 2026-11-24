@@ -153,11 +153,14 @@ ErrorDocument 404 /404.html
   <FilesMatch "\.php$">
     Header always set Cache-Control "no-store"
   </FilesMatch>
-  # index.php is the homepage ("/" resolves to it first). It must always
-  # revalidate, but no-store also keeps browsers from restoring it from the
-  # back/forward cache. "private, no-cache" keeps it out of shared caches and
-  # fresh on every load while letting back/forward be instant.
+  # The homepage ("/" resolves to index.php first) must always revalidate,
+  # but no-store also keeps browsers from restoring it from the back/forward
+  # cache. "private, no-cache" keeps it out of shared caches and fresh on
+  # every load while letting back/forward be instant. Scoped by
+  # homepage_request so every other index.php that inherits this file (the
+  # HAXcms core under /cdn/, its API, any site below this docroot) keeps
+  # no-store.
   <FilesMatch "^index\.php$">
-    Header always set Cache-Control "private, no-cache"
+    Header always set Cache-Control "private, no-cache" env=homepage_request
   </FilesMatch>
 </IfModule>
