@@ -11,7 +11,6 @@ import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 import { loadFontFamily } from "@haxtheweb/d-d-d/lib/fonts.js";
 import "@haxtheweb/future-terminal-text/future-terminal-text.js";
 import "@haxtheweb/un-sdg/un-sdg.js";
-import "@haxtheweb/video-player/video-player.js";
 import "@haxtheweb/simple-icon/lib/simple-icon-lite.js";
 import "@haxtheweb/simple-icon/lib/simple-icons.js";
 import "@haxtheweb/hax-iconset/lib/simple-hax-iconset.js";
@@ -27,9 +26,7 @@ import {
   HaxFutureTravelerStyles,
 } from "@haxtheweb/hax-network-bar/lib/hax-future-traveler.js";
 import "./psu-network-bar.js";
-import "./psu-game-day.js";
 import "./psu-peek.js";
-import "./psu-traveler.js";
 import "./psu-voices.js";
 import { examples } from "./examples.mjs";
 
@@ -53,7 +50,7 @@ const WAYS = [
     preset: "future-traveler",
     seed: "intern",
     color: "alertImmediate",
-    link: `${CLOUD}hax-lab`,
+    link: "https://lab.hax.cloud/",
     label: "Meet HAX Lab",
     text: "Build a real feature that ships to hundreds of sites. Alumni now work at Red Hat, Adobe, IBM, Ford and PennDOT.",
   },
@@ -299,6 +296,7 @@ export class HaxPsu extends DDD {
     if (super.firstUpdated) {
       super.firstUpdated(changed);
     }
+    this._lazyDefine();
     if (reducedMotion()) {
       return;
     }
@@ -312,6 +310,60 @@ export class HaxPsu extends DDD {
         }
       }, 2500 * (i + 1));
     });
+  }
+
+  // Elements far below the fold are defined only when the visitor nears
+  // them, so their code (video-player brings a whole media player) stays off
+  // the first paint. Each still renders exactly as before once it loads.
+  _lazyDefine() {
+    const later = [
+      [".students-video", () => import("@haxtheweb/video-player/video-player.js")],
+      ["psu-game-day", () => import("./psu-game-day.js")],
+    ];
+    const io =
+      "IntersectionObserver" in globalThis
+        ? new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                io.unobserve(entry.target);
+                entry.target._lazyLoad();
+              });
+            },
+            { rootMargin: "800px 0px" },
+          )
+        : null;
+    const idle = globalThis.requestIdleCallback || ((fn) => setTimeout(fn, 1));
+    const pending = [];
+    later.forEach(([selector, load]) => {
+      const el = this.shadowRoot.querySelector(selector);
+      if (!el) return;
+      let loaded = false;
+      el._lazyLoad = () => {
+        if (loaded) return;
+        loaded = true;
+        load();
+      };
+      pending.push(el);
+      if (io) io.observe(el);
+      else el._lazyLoad();
+    });
+    // the Future Traveler only appears after scrolling, so load it once idle
+    idle(() => import("./psu-traveler.js"));
+    // Safety net: once the page has finished loading and gone quiet, define
+    // whatever is still waiting, so screen reader and find-in-page users who
+    // reach these sections without scrolling past them still get them.
+    const finish = () =>
+      setTimeout(
+        () =>
+          idle(() => {
+            if (io) io.disconnect();
+            pending.forEach((el) => el._lazyLoad());
+          }),
+        3000,
+      );
+    if (globalThis.document.readyState === "complete") finish();
+    else globalThis.addEventListener("load", finish, { once: true });
   }
 
   _goHash() {
@@ -725,6 +777,7 @@ export class HaxPsu extends DDD {
         }
         .net li.here .tile img {
           height: 36px;
+          width: auto;
         }
 
         /* lab */
@@ -1202,6 +1255,9 @@ export class HaxPsu extends DDD {
         .students-video video-player {
           display: block;
         }
+        .students-video video-player:not(:defined) {
+          aspect-ratio: 16 / 9;
+        }
         .students-video p {
           font-size: 17px;
         }
@@ -1403,7 +1459,7 @@ export class HaxPsu extends DDD {
     return html`<ul class="net">
       <li class="here">
         <a href="#top" @click="${this._navClick}">
-          <span class="tile"><img src="${img("images/psu-shield.png")}" alt="" /></span>
+          <span class="tile"><img src="${img("images/psu-shield.png")}" alt="" width="106" height="126" /></span>
           <strong>HAX at Penn State</strong>
           <span class="host">hax.psu.edu · you are here</span>
           <span class="purpose">Log in with your Penn State account and build. Hosted, supported and governed by Penn State.</span>
@@ -1444,7 +1500,7 @@ export class HaxPsu extends DDD {
               this._place = this._place === "open" ? "" : "open";
             }}"
           >
-            <img src="${img("images/psu-shield.png")}" alt="" />
+            <img src="${img("images/psu-shield.png")}" alt="" width="106" height="126" />
             <span class="word">Penn State</span>
             <span class="sr-only">: HAX @ PSU, you are here</span>
           </button>

@@ -41,7 +41,7 @@ Online every Monday, Wednesday and Friday, noon to 4 p.m. Eastern. Many contribu
 
 Build a real feature that ships to hundreds of sites. Alumni now work at Red Hat, Adobe, IBM, Ford and PennDOT.
 
-[Meet HAX Lab](https://hax.cloud/hax-lab)
+[Meet HAX Lab](https://lab.hax.cloud/)
 
 ### Bring your club
 
