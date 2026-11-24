@@ -1,8 +1,9 @@
 {
-    "crons": [
-        {
-          "path": "/api/cron",
-          "schedule": "54 5 * * *"
-        }
-    ]
+  "buildCommand": "npm run build:ci",
+  "crons": [
+    {
+      "path": "/api/cron",
+      "schedule": "54 5 * * *"
+    }
+  ]
 }
