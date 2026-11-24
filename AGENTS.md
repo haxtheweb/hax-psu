@@ -57,17 +57,15 @@ hax-psu/
 npm run build :=
   npm run screenshots       # Playwright + sharp → assets/screenshots/
   && npm run sync:content   # regenerate static/AI copies of the homepage from src/hax-psu.js
-  && rimraf dist
-  && rollup -c rollup.config.js   # bundle SPA → dist/ (+ workbox service worker)
-  && npm run analyze -- --exclude dist built   # custom-elements.json
+  && npm run build:bundle   # rimraf dist → rollup (SPA + workbox SW) → cem analyze (custom-elements.json)
   && npm run build:agent-skills   # regenerate .well-known/agent-skills/ from ../praw/skills + ../create/src/skills
-  && rm -rf built
-  && cp -r dist built
-  && cp -r env/* built/
-  && cp env/.htaccess built/
-  && cp llms.txt llms-full.txt built/
-  && cp -r .well-known built/
+  && npm run build:package  # rm -rf built → cp dist, env/*, env/.htaccess, llms*.txt, .well-known into built/
+
+npm run build:ci :=        # what Vercel runs (vercel.json buildCommand)
+  npm run build:bundle && npm run build:package
 ```
+
+`build:ci` skips the three generator steps (screenshots, sync:content, build:agent-skills). Their outputs (`assets/screenshots/`, the synced regions of `index.html` / `llms*.txt`, `.well-known/agent-skills/`) are committed, and the steps need things a hosted build image does not have: Chromium's OS libraries (e.g. `libnspr4.so`) and a sibling `../praw` checkout. Run the full `npm run build` locally and commit the results; `check:content` in GitHub Actions catches homepage-copy drift.
 
 Other scripts:
 - `npm start` / `npm run start:build` — web-dev-server dev / built preview.
