@@ -5,6 +5,7 @@
 import { html, css } from "lit";
 import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 import { HaxUiAdminStyles } from "@haxtheweb/d-d-d/lib/HaxUiAdminStyles.js";
+import { applyContextHeadingLevel } from "@haxtheweb/d-d-d/lib/headingLevel.js";
 import { HaxUiAdminSimpleFields } from "@haxtheweb/d-d-d/lib/HaxUiAdminControls.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 import { I18NManagerStore } from "@haxtheweb/i18n-manager/i18n-manager.js";
@@ -632,7 +633,7 @@ class RpgCharacterBuilder extends I18NMixin(DDD) {
           font-weight: var(--ddd-font-weight-bold, 700);
         }
         .seg {
-          min-height: 36px;
+          min-height: var(--ddd-control-height-sm, 40px);
           padding: 0 12px;
           border-radius: var(--hax-ui-radius-pill);
           border: 2px solid var(--hax-ui-line);
@@ -1019,6 +1020,17 @@ class RpgCharacterBuilder extends I18NMixin(DDD) {
   updated(changedProperties) {
     if (super.updated) {
       super.updated(changedProperties);
+    }
+    // section and swatch headings are drawn as h3 and h4; give them the
+    // level the builder sits at on the page
+    if (this.shadowRoot) {
+      applyContextHeadingLevel(
+        this,
+        this.shadowRoot.querySelector(".board-head h3"),
+      );
+      this.shadowRoot
+        .querySelectorAll(".board h4")
+        .forEach((h) => applyContextHeadingLevel(this, h, 1));
     }
     if (
       this.syncUrl &&

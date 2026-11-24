@@ -5,7 +5,7 @@ description: >
   Use when the user wants to add pages, create courses, update content, add assessments, add quizzes,
   add videos, use HAX web components, analyze existing HAX sites, or suggest improvements using
   the ClaudeHAX /hax slash command or HAX CLI directly.
-version: 1.1.0
+version: 1.3.0
 license: Apache-2.0
 metadata:
   author: haxtheweb
@@ -100,12 +100,23 @@ When operating outside the `/hax` slash command, use the HAX CLI directly:
 - `hax serve` — Development server at http://localhost
 - `hax webcomponent <name> --y` — Scaffold a new component
 - `hax site <name> --y --no-i` — Create a new HAXsite
+- `hax site node:add --title=<title> --parent=<id-or-slug> --content=<file, URL or HTML>` — add a page (appended after its siblings without `--order`)
+- `hax site node:edit --item-id=<id-or-slug> --title=<title> --content=<file, URL or HTML>` — edit a page through the same operations as the site API; also `--slug`, `--description`, `--tags`, `--published=true|false`, `--hide-in-menu=true|false`, `--parent=<id-or-slug>` or `--parent=null` (top level), `--order`, `--move=up|down|indent|outdent` (one step among its siblings, or one level in or out), `--locked=true|false` (a locked page refuses every other change until it is unlocked; unlocking runs first and locking last when combined with other flags), `--theme`. Whenever `--parent` is given (even the current parent, or `null` for a page already at the top level) and no `--order` is given, the page goes after the last of its siblings (highest sibling order + 1), the same as the API's setParent
+- `hax site node:delete --item-id=<id-or-slug> --y` — delete a page
+- `hax site site:theme --theme=<theme>` — change the site theme (same as the API's appearance settings)
+- `hax site site:validate --format json` — check a site's structure and content; exits 1 on errors
+- `hax site site:archive` / `hax site site:restore --source <file>` — snapshot a site and put it back
+- `hax site site:rebuild` — regenerate feeds, sitemap, search index, `llms.txt` and managed files
+- `hax site site:list` — list the sites in a folder or a HAXcms `_sites/` root
+- `hax list --format json` — every command, action and option as JSON, so you can discover the CLI without parsing `--help`
 - `hax audit` — DDD compliance audit
 - `hax audit schema` — validate site.json, skeletons, haxProperties, appstore.json and Merlin commands against the HAX schemas
 - `hax audit i18n` — find English hardcoded in Lit templates that should come from `this.t`
+- `hax audit theme` — check a custom theme against the HAXcms theme contract (`--format json` for rule, line and fix)
 - `hax skills list` — List bundled agent skills
 - `hax skills install <name|--all>` — Install bundled skills into `.agents/skills/`
 - `hax update` — Update HAX CLI
+- `hax platform status` — HAXcms install vs latest release and security advisories (`--path`, `--format json`); `hax platform upgrade|verify|rollback` for haxcms-php installs (never on HAXiam deployments)
 
 **Automation flags** (always use when scripting to prevent interruptions):
 
@@ -113,6 +124,11 @@ When operating outside the `/hax` slash command, use the HAX CLI directly:
 - `--no-i` — Prevent interactive sub-processes
 - `--skip` — Skip animations
 - `--quiet` — Suppress console logging
+- `--agent` — Record the changes as an agent's in the site's history (same as `HAX_ACTOR=agent`)
+
+Pass values as `--flag=value`; a value that starts with `-` must use that form or it is read as another flag.
+
+`--content` is read in this order: a value starting with `http://` or `https://` is fetched as a URL; otherwise a one-line value (under 4096 characters) that names an existing file is read from that file; anything else is inline HTML (or Markdown/JSON/YAML with `--content-format`). No flag forces inline content, so URL-like or file-name-like text is fetched or read instead of kept. To keep it inline, wrap it in an element (`--content="<p>https://example.com</p>"`) or pass a file.
 
 ## HAX Component Preference
 
@@ -158,6 +174,8 @@ If a site root is provided, use it. Otherwise default to `--root .`.
 
 Before destructive operations (deleting pages, overwriting large amounts of content, restructuring a site, publishing changes), explain the planned changes and request confirmation.
 
+Before any bulk or destructive change, run `hax site site:archive --y --no-i --agent` so the site can be restored, and run `hax site site:validate --format json --y --no-i` before and after the change. Errors that appear only after your change are yours to fix.
+
 For non-destructive operations (adding pages, creating content, adding components, analyzing sites, exporting content), proceed without requiring additional confirmation.
 
 ## OpenStax Import Workflow
@@ -170,4 +188,4 @@ If the user is starting from an OpenStax book, use the `hax-openstax2hax` skill 
 - HAX CLI package: `https://www.npmjs.com/package/@haxtheweb/create`
 - HAX Documentation: `https://haxtheweb.org/`
 - HAX web components: `https://github.com/haxtheweb/webcomponents/tree/master/elements`
-- PRAW RULES.md: `~/Documents/git/haxtheweb/praw/RULES.md` (canonical ecosystem rules referenced by Rule ID)
+- PRAW RULES.md: `https://github.com/haxtheweb/praw/blob/main/RULES.md` (canonical ecosystem rules referenced by Rule ID)
