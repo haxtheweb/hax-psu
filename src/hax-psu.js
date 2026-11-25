@@ -31,7 +31,9 @@ import "./psu-voices.js";
 import { examples } from "./examples.mjs";
 
 const CLOUD = "https://hax.cloud/";
-const STATS_URL = "https://open-apis.hax.cloud/api/services/stats/haxPsuUsage";
+// usage numbers the HAX stats job writes on this server; same origin, so
+// nothing is asked of another host (open-apis.hax.cloud used to relay them)
+const STATS_URL = "/stats/stats.json";
 const DISCORD = "https://discord.gg/aCGxmRHEJP";
 
 // ways into HAX Lab
@@ -265,7 +267,7 @@ export class HaxPsu extends DDD {
       if (place && !e.composedPath().includes(place)) this._place = "";
     };
     // read the numbers when the page loads; nothing is cached or stored here.
-    // The endpoint serves what the HAX stats job last compiled.
+    // /stats/stats.json is what the HAX stats job last compiled.
     this._loadStats();
     // the pixel font for the hero word and game day, served by DDD (no Google)
     loadFontFamily("Press Start 2P");
@@ -276,9 +278,9 @@ export class HaxPsu extends DDD {
       const res = await fetch(STATS_URL);
       if (!res.ok) throw new Error(res.status);
       const json = await res.json();
-      this.stats = json.data.overall;
+      this.stats = json && json.overall ? json.overall : null;
     } catch (e) {
-      // the endpoint could not be reached: leave the strip out
+      // the file could not be read (e.g. a preview deploy): leave the strip out
       this.stats = null;
     }
   }
