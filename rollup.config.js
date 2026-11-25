@@ -3,6 +3,7 @@ import babel from '@rollup/plugin-babel';
 import { rollupPluginHTML as html } from '@web/rollup-plugin-html';
 
 import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
+import { elementLocales } from './scripts/rollup-plugin-element-locales.mjs';
 import terser from '@rollup/plugin-terser';
 import { generateSW } from 'rollup-plugin-workbox';
 import pkg from 'rollup-plugin-copy';
@@ -80,9 +81,13 @@ export default {
     /** Minify JS */
     terser(),
     /** Bundle assets references via import.meta.url */
-    // a HAX element can point at a folder (its i18n `locales/`); leave those
-    // references as they are instead of failing the build
+    // warnOnError until the installed elements carry the anchored locale
+    // URLs (haxtheweb/issues#3402): older ones point at their `locales/`
+    // folder (EISDIR) or, in hax-consent-gate 26.11.0, a file it never
+    // shipped (ENOENT). Those references are left as written
     importMetaAssets({ warnOnError: true }),
+    /** Copy bundled elements' translations to where they fetch them */
+    elementLocales(),
     /** Compile JS to a lower language target */
     babel({
       babelHelpers: 'bundled',
