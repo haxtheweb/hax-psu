@@ -3,7 +3,7 @@
   "description": "HAX.psu homepage",
   "license": "Apache-2.0",
   "author": "btopro",
-  "version": "9.0.6",
+  "version": "26.11.0",
   "type": "module",
   "scripts": {
     "screenshots": "node scripts/screenshot.mjs",
