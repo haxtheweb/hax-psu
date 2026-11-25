@@ -43,8 +43,23 @@
         "@id": "https://hax.psu.edu/#organization",
         "name": "HAX at Penn State",
         "url": "https://hax.psu.edu/",
+        "description": "HAX at Penn State is the university's hosted HAX service: a free, open-source, accessible website builder for courses, portfolios, labs and projects, available to anyone with a Penn State account.",
         "logo": "https://hax.psu.edu/assets/icon-512x512.png",
         "email": "hax@psu.edu",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hax@psu.edu",
+          "url": "https://discord.gg/aCGxmRHEJP",
+          "availableLanguage": "en"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "University Park",
+          "addressRegion": "PA",
+          "postalCode": "16802",
+          "addressCountry": "US"
+        },
         "parentOrganization": {
           "@type": "CollegeOrUniversity",
           "name": "The Pennsylvania State University",
@@ -150,6 +165,11 @@
     ]
   }
   </script>
+  <link rel="preconnect" href="https://open-apis.hax.cloud" crossorigin />
+  <!-- the two faces the first screen is set in; fetched now instead of after
+       the app script asks DDD for them, so text doesn't reflow late -->
+  <link rel="preload" href="/fonts/roboto/roboto-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/roboto-condensed/roboto-condensed-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="manifest" href="manifest.json" />
   <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#1e407c" />
   <meta name="msapplication-TileColor" content="#1e407c" />
@@ -372,7 +392,7 @@
         <p><a href="https://discord.gg/aCGxmRHEJP">Join the Discord</a></p>
         <h3>Independent study or internship</h3>
         <p>Build a real feature that ships to hundreds of sites. Alumni now work at Red Hat, Adobe, IBM, Ford and PennDOT.</p>
-        <p><a href="https://hax.cloud/hax-lab">Meet HAX Lab</a></p>
+        <p><a href="https://lab.hax.cloud/">Meet HAX Lab</a></p>
         <h3>Bring your club</h3>
         <p>Security, UX, design: student clubs bring their own passion and HAX gives them a real problem to work on.</p>
         <p><a href="https://hax.cloud/stories/1eb915c8">See what clubs did</a></p>

@@ -81,6 +81,9 @@ ErrorDocument 404 /404.html
   RewriteCond %{HTTP:Accept} text/markdown [NC]
   RewriteCond %{HTTP:Accept} !text/html [NC]
   RewriteRule ^(index\.(html|php))?$ llms-full.txt [L,E=markdown_request:1]
+  # One canonical Markdown URL for the site root: /index.md is the same
+  # Markdown twin, for agents that fetch the .md form instead of negotiating.
+  RewriteRule ^index\.md$ llms-full.txt [L,E=markdown_request:1]
   # No SPA catch-all: the homepage only uses #hash navigation and the
   # backend is real files (login.php, webhook.php, stats/), so unknown paths
   # get a real 404 (see ErrorDocument below) instead of the homepage with a
@@ -149,5 +152,15 @@ ErrorDocument 404 /404.html
   # PHP endpoints are dynamic — never cache (the CDN serves no PHP).
   <FilesMatch "\.php$">
     Header always set Cache-Control "no-store"
+  </FilesMatch>
+  # The homepage ("/" resolves to index.php first) must always revalidate,
+  # but no-store also keeps browsers from restoring it from the back/forward
+  # cache. "private, no-cache" keeps it out of shared caches and fresh on
+  # every load while letting back/forward be instant. Scoped by
+  # homepage_request so every other index.php that inherits this file (the
+  # HAXcms core under /cdn/, its API, any site below this docroot) keeps
+  # no-store.
+  <FilesMatch "^index\.php$">
+    Header always set Cache-Control "private, no-cache" env=homepage_request
   </FilesMatch>
 </IfModule>

@@ -74,7 +74,8 @@ export class PsuTraveler extends DDD {
   connectedCallback() {
     super.connectedCallback();
     globalThis.addEventListener("scroll", this._onScroll, { passive: true });
-    this._onScroll();
+    // first check waits a frame so reading scrollY doesn't force layout mid-render
+    globalThis.requestAnimationFrame(() => this._onScroll());
   }
   disconnectedCallback() {
     globalThis.removeEventListener("scroll", this._onScroll);

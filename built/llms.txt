@@ -21,7 +21,7 @@ Key facts:
 - [HAXTheWeb](https://haxtheweb.org/): Why HAX, and every way to get it outside Penn State.
 - [Learn HAX](https://learn.hax.cloud/): Tutorials that teach HAX one flow at a time.
 - [HAX CLI](https://www.npmjs.com/package/@haxtheweb/create): `npm install --global @haxtheweb/create` then `hax start` to build HAX sites locally.
-- [HAX Lab](https://hax.cloud/hax-lab): Students and contributors build HAX itself; open office hours online Monday, Wednesday and Friday, noon to 4 p.m. Eastern, joined through the Discord.
+- [HAX Lab](https://lab.hax.cloud/): Students and contributors build HAX itself; open office hours online Monday, Wednesday and Friday, noon to 4 p.m. Eastern, joined through the Discord.
 
 ## Documentation
 
