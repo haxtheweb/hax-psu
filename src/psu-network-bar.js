@@ -8,6 +8,10 @@
  *    which also drops the "In your browser" Install tab.
  *  - a host place: a site that is a door into the network rather than one of
  *    its properties puts its own lit mark first (slot="pre"), at every width.
+ * And one thing the real element leaves to the page: the goggles. Merlin's
+ * "Contribute with the goggles" puts them on right here, over the homepage,
+ * instead of sending people to the component gallery. Their code (from
+ * haxcms-elements) loads the first time they go on.
  * Everything else is the real hax-network-bar.
  */
 import { css } from "lit";
@@ -63,4 +67,26 @@ export class PsuNetworkBar extends HaxNetworkBar {
     }
   }
 }
+
+// the goggles, on this page (see above); the bar's own fallback if they
+// can't load
+globalThis.addEventListener("hax-network-goggles", (e) => {
+  e.preventDefault();
+  const bar = e.detail && e.detail.bar;
+  // some of the goggles' parts read process.env, as Merlin's do (the bar
+  // fills it in the same way when Merlin loads)
+  globalThis.process = globalThis.process || {
+    env: { NODE_ENV: "production" },
+  };
+  import("@haxtheweb/haxcms-elements/lib/core/ui/haxcms-goggles.js")
+    .then((m) => {
+      const goggles = m.GogglesState;
+      goggles.set({ on: !goggles.on, lensOn: true });
+    })
+    .catch(() => {
+      if (bar && typeof bar.go === "function") {
+        bar.go("https://webcomponents.hax.cloud/?goggles=code");
+      }
+    });
+});
 globalThis.customElements.define(PsuNetworkBar.tag, PsuNetworkBar);
