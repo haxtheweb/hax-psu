@@ -133,6 +133,11 @@ ErrorDocument 404 /404.html
   # The homepage varies by Accept (HTML app vs Markdown, see rewrite above);
   # tell caches so they don't hand Markdown to a browser.
   Header merge Vary Accept env=homepage_request
+  # Point agents at the site's machine-readable descriptions (RFC 8288),
+  # from the homepage only.
+  Header always append Link "</llms-full.txt>; rel=\"alternate\"; type=\"text/markdown\"" env=homepage_request
+  Header always append Link "</llms.txt>; rel=\"describedby\"; type=\"text/markdown\"" env=homepage_request
+  Header always append Link "</sitemap.xml>; rel=\"sitemap\"" env=homepage_request
   Header set Content-Type "text/markdown; charset=utf-8" env=REDIRECT_markdown_request
   Header set Content-Type "text/markdown; charset=utf-8" env=markdown_request
   # Long, immutable cache for content-hashed rollup assets (entry/chunks
