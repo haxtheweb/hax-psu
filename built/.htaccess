@@ -135,7 +135,6 @@ ErrorDocument 404 /404.html
   Header merge Vary Accept env=homepage_request
   # Point agents at the site's machine-readable descriptions (RFC 8288),
   # from the homepage only.
-  Header always append Link "</.well-known/api-catalog>; rel=\"api-catalog\"" env=homepage_request
   Header always append Link "</llms-full.txt>; rel=\"alternate\"; type=\"text/markdown\"" env=homepage_request
   Header always append Link "</llms.txt>; rel=\"describedby\"; type=\"text/markdown\"" env=homepage_request
   Header always append Link "</sitemap.xml>; rel=\"sitemap\"" env=homepage_request
@@ -170,12 +169,3 @@ ErrorDocument 404 /404.html
     Header always set Cache-Control "private, no-cache" env=homepage_request
   </FilesMatch>
 </IfModule>
-
-# RFC 9727 API catalog: no file extension, so set its media type by name,
-# and allow cross-origin reads like the rest of the agent-discovery files.
-<Files "api-catalog">
-  ForceType application/linkset+json
-  <IfModule mod_headers.c>
-    Header always set Access-Control-Allow-Origin "*"
-  </IfModule>
-</Files>

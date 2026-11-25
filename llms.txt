@@ -60,7 +60,6 @@ Key facts:
 
 - [Full homepage content as Markdown](https://hax.psu.edu/llms-full.txt): Everything on hax.psu.edu, including the FAQ, in one file.
 - [Agent skills index](https://hax.psu.edu/.well-known/agent-skills/index.json): agentskills.io discovery index of curated HAX skills (site building, content authoring, WCAG/UDL/UbD/OER Schema audits, web component development). Each skill's SKILL.md is served alongside it under /.well-known/agent-skills/<name>/. Install them all with `npx skills add haxtheweb/praw --all`.
-- [Usage stats API](https://open-apis.hax.cloud/api/services/stats/haxPsuUsage): Live JSON totals for HAX at Penn State (sites, people, pages); no key needed. OpenAPI description at https://hax.psu.edu/openapi.json, listed in the API catalog at https://hax.psu.edu/.well-known/api-catalog.
 
 ## Optional
 
