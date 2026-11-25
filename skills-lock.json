@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "heosat": {
+      "source": "haxtheweb/praw",
+      "sourceType": "github",
+      "skillPath": "skills/heosat/SKILL.md",
+      "computedHash": "1de254bc1daff1387bc2ec6a44a667bd172f3b9d2d6434199a3bdac7bc351727"
+    }
+  }
+}
