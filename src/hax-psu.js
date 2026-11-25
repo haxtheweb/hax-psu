@@ -231,6 +231,32 @@ const NAV = [
   ["#faq", "FAQ"],
 ];
 
+// the Future Traveler's goggles, drawn in his colors (hax-future-traveler
+// "now") on the shield's own 117 by 126 grid so they sit over the lion's eyes
+const psuGoggles = html`<svg class="goggles" viewBox="0 0 117 126" focusable="false">
+  <path d="M14 44 L104 49" stroke="#1d5e3c" stroke-width="9" stroke-linecap="round" fill="none"></path>
+  <g class="glow" fill="none" stroke="#2fd3e0" stroke-width="12">
+    <circle cx="51" cy="46" r="13"></circle>
+    <circle cx="82" cy="48" r="13"></circle>
+  </g>
+  <g fill="#1d5e3c">
+    <circle cx="51" cy="46" r="16"></circle>
+    <circle cx="82" cy="48" r="16"></circle>
+  </g>
+  <g fill="#0b4a50">
+    <circle cx="51" cy="46" r="11"></circle>
+    <circle cx="82" cy="48" r="11"></circle>
+  </g>
+  <g class="lens" fill="#2fd3e0">
+    <circle cx="51" cy="46" r="11"></circle>
+    <circle cx="82" cy="48" r="11"></circle>
+  </g>
+  <g class="lens" fill="#fff">
+    <rect x="43" y="38" width="5" height="5"></rect>
+    <rect x="74" y="40" width="5" height="5"></rect>
+  </g>
+</svg>`;
+
 // files under assets/, which the build copies beside the bundle
 function img(path) {
   return new URL(`../assets/${path}`, import.meta.url).href;
@@ -1108,19 +1134,169 @@ export class HaxPsu extends DDD {
           cursor: pointer;
           transition: box-shadow 0.2s ease-out;
         }
-        .psu-here img {
-          height: 30px;
-          width: auto;
-          transition: transform 0.25s ease-out;
+        /* the whole shield, sized to sit inside the button with room to
+           spare. Hover or keyboard focus glitches it into 8-bit and the
+           Future Traveler's goggles light up on the lion; it settles back
+           when you leave. */
+        .psu-here .shield {
+          position: relative;
+          display: inline-block;
+          flex: none;
+          height: 28px;
+          aspect-ratio: 117 / 126;
+        }
+        .psu-here .shield img,
+        .psu-here .shield .goggles {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+        }
+        .psu-here .shield .pixel {
+          image-rendering: pixelated;
+          opacity: 0;
+        }
+        .psu-here .shield .goggles {
+          opacity: 0;
+          transform: translateY(-40%);
+          overflow: visible;
+          transition:
+            opacity 0.15s ease-out,
+            transform 0.15s ease-out;
+        }
+        .psu-here .shield .goggles .lens,
+        .psu-here .shield .goggles .glow {
+          opacity: 0;
         }
         .psu-place:hover .psu-here,
         .psu-here:focus-visible {
           box-shadow: 0 0 0 3px var(--ddd-theme-default-keystoneYellow);
           outline: none;
         }
-        .psu-place:hover .psu-here img,
-        .psu-here:focus-visible img {
-          transform: rotate(-8deg) scale(1.08);
+        .psu-place:hover .psu-here .shield .real,
+        .psu-here:focus-visible .shield .real {
+          animation: psu-glitch-out 0.4s steps(1, end) forwards;
+        }
+        .psu-place:hover .psu-here .shield .pixel,
+        .psu-here:focus-visible .shield .pixel {
+          animation: psu-glitch-in 0.4s steps(1, end) forwards;
+        }
+        .psu-place:hover .psu-here .shield .goggles,
+        .psu-here:focus-visible .shield .goggles {
+          opacity: 1;
+          transform: none;
+          transition:
+            opacity 0.1s linear 0.35s,
+            transform 0.2s cubic-bezier(0.3, 1.6, 0.6, 1) 0.35s;
+        }
+        .psu-place:hover .psu-here .shield .goggles .lens,
+        .psu-here:focus-visible .shield .goggles .lens {
+          animation: psu-lens-on 0.3s steps(1, end) 0.55s forwards;
+        }
+        .psu-place:hover .psu-here .shield .goggles .glow,
+        .psu-here:focus-visible .shield .goggles .glow {
+          animation:
+            psu-lens-on 0.3s steps(1, end) 0.55s forwards,
+            psu-lens-pulse 1.6s ease-in-out 0.85s infinite;
+        }
+        @keyframes psu-glitch-out {
+          0% {
+            transform: translate(0, 0);
+            filter: none;
+          }
+          12% {
+            transform: translate(-2px, 0);
+            clip-path: inset(0 0 55% 0);
+            filter: drop-shadow(2px 0 0 #ff2d6f) drop-shadow(-2px 0 0 #2fd3e0);
+          }
+          25% {
+            transform: translate(2px, 1px);
+            clip-path: inset(40% 0 10% 0);
+          }
+          38% {
+            transform: translate(-1px, -1px);
+            clip-path: none;
+            opacity: 1;
+          }
+          50% {
+            opacity: 0;
+          }
+          62% {
+            opacity: 1;
+            transform: translate(1px, 0);
+            clip-path: inset(20% 0 45% 0);
+          }
+          75%,
+          100% {
+            opacity: 0;
+            clip-path: none;
+            transform: none;
+            filter: none;
+          }
+        }
+        @keyframes psu-glitch-in {
+          0%,
+          38% {
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+            transform: translate(2px, 0);
+          }
+          62% {
+            opacity: 0;
+          }
+          75%,
+          100% {
+            opacity: 1;
+            transform: none;
+          }
+        }
+        @keyframes psu-lens-on {
+          0% {
+            opacity: 1;
+          }
+          30% {
+            opacity: 0;
+          }
+          60%,
+          100% {
+            opacity: 1;
+          }
+        }
+        @keyframes psu-lens-pulse {
+          0%,
+          100% {
+            opacity: 0.35;
+          }
+          50% {
+            opacity: 0.75;
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .psu-place:hover .psu-here .shield .real,
+          .psu-here:focus-visible .shield .real {
+            animation: none;
+            opacity: 0;
+          }
+          .psu-place:hover .psu-here .shield .pixel,
+          .psu-here:focus-visible .shield .pixel {
+            animation: none;
+            opacity: 1;
+          }
+          .psu-here .shield .goggles,
+          .psu-place:hover .psu-here .shield .goggles,
+          .psu-here:focus-visible .shield .goggles {
+            transform: none;
+            transition: none;
+          }
+          .psu-place:hover .psu-here .shield .goggles .lens,
+          .psu-here:focus-visible .shield .goggles .lens,
+          .psu-place:hover .psu-here .shield .goggles .glow,
+          .psu-here:focus-visible .shield .goggles .glow {
+            animation: none;
+            opacity: 1;
+          }
         }
         .psu-card {
           display: none;
@@ -1459,7 +1635,7 @@ export class HaxPsu extends DDD {
     return html`<ul class="net">
       <li class="here">
         <a href="#top" @click="${this._navClick}">
-          <span class="tile"><img src="${img("images/psu-shield.png")}" alt="" width="106" height="126" /></span>
+          <span class="tile"><img src="${img("images/psu-shield.png")}" alt="" width="117" height="126" /></span>
           <strong>HAX at Penn State</strong>
           <span class="host">hax.psu.edu · you are here</span>
           <span class="purpose">Log in with your Penn State account and build. Hosted, supported and governed by Penn State.</span>
@@ -1500,7 +1676,11 @@ export class HaxPsu extends DDD {
               this._place = this._place === "open" ? "" : "open";
             }}"
           >
-            <img src="${img("images/psu-shield.png")}" alt="" width="106" height="126" />
+            <span class="shield" aria-hidden="true">
+              <img class="real" src="${img("images/psu-shield.png")}" alt="" width="117" height="126" />
+              <img class="pixel" src="${img("images/psu-shield-pixel.png")}" alt="" width="18" height="19" />
+              ${psuGoggles}
+            </span>
             <span class="word">Penn State</span>
             <span class="sr-only">: HAX @ PSU, you are here</span>
           </button>
