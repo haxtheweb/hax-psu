@@ -1,0 +1,159 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "HAX at Penn State usage stats",
+    "version": "1.0.0",
+    "summary": "Live usage totals for HAX at Penn State (hax.psu.edu).",
+    "description": "Read-only totals for the HAX at Penn State service: how many sites exist, how many people own them, and how many pages they hold. The hax.psu.edu homepage reads this on every visit. Totals are compiled by the HAX staging system and cached for up to a day. No authentication; CORS is open.",
+    "contact": {
+      "name": "HAX at Penn State",
+      "email": "hax@psu.edu",
+      "url": "https://hax.psu.edu/"
+    },
+    "license": {
+      "name": "Apache-2.0",
+      "identifier": "Apache-2.0"
+    }
+  },
+  "externalDocs": {
+    "description": "HAX at Penn State, for AI agents and developers",
+    "url": "https://hax.psu.edu/llms.txt"
+  },
+  "servers": [
+    {
+      "url": "https://open-apis.hax.cloud",
+      "description": "HAX open APIs (source: https://github.com/haxtheweb/open-apis)"
+    }
+  ],
+  "security": [],
+  "paths": {
+    "/api/services/stats/haxPsuUsage": {
+      "get": {
+        "operationId": "getHaxPsuUsage",
+        "summary": "Get HAX at Penn State usage totals",
+        "description": "Returns the current site, user and page totals for hax.psu.edu.",
+        "tags": [
+          "stats"
+        ],
+        "responses": {
+          "200": {
+            "description": "Current totals.",
+            "headers": {
+              "Cache-Control": {
+                "description": "Shared caches may keep the totals for up to a day.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "data": {
+                    "overall": {
+                      "site_count": 307,
+                      "user_count": 368,
+                      "total_pages": 17292
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The totals could not be loaded from the staging system.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "status": 400,
+                  "reason": "data from stats failed to load"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UsageResponse": {
+        "type": "object",
+        "required": [
+          "status",
+          "data"
+        ],
+        "properties": {
+          "status": {
+            "type": "integer",
+            "const": 200
+          },
+          "data": {
+            "type": "object",
+            "required": [
+              "overall"
+            ],
+            "properties": {
+              "overall": {
+                "$ref": "#/components/schemas/Overall"
+              }
+            }
+          }
+        }
+      },
+      "Overall": {
+        "type": "object",
+        "required": [
+          "site_count",
+          "user_count",
+          "total_pages"
+        ],
+        "properties": {
+          "site_count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Sites on hax.psu.edu."
+          },
+          "user_count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "People who own at least one site."
+          },
+          "total_pages": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Pages across all sites."
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "status",
+          "reason"
+        ],
+        "properties": {
+          "status": {
+            "type": "integer"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "stats",
+      "description": "Usage totals for HAX at Penn State."
+    }
+  ]
+}
